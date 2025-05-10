@@ -5,13 +5,7 @@
   flex-direction: column;
   padding: 0;
   margin: 0;
-  background-color: #f9f9f9;
-}
-
-@media (prefers-color-scheme: dark) {
-  .app-container {
-    background-color: #1f1f1f;
-  }
+  background-color: #ffffff;
 }
 
 @media (max-width: 768px) {
