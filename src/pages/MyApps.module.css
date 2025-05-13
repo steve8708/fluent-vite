@@ -1,0 +1,268 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--colorNeutralBackground1);
+  color: var(--colorNeutralForeground1);
+}
+
+.darkContainer {
+  background-color: var(--colorNeutralBackground1);
+  color: var(--colorNeutralForeground1);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--colorNeutralStroke1);
+  background-color: var(--colorNeutralBackground1);
+}
+
+.headerLeftSection {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.headerLeftGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.headerIcon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background-color: var(--colorNeutralBackground2);
+}
+
+.iconFabric {
+  font-family: 'Fabric MDL2 Assets';
+  font-size: 16px;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.microsoftLogo {
+  height: 24px;
+}
+
+.headerDivider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dividerVertical {
+  width: 1px;
+  height: 24px;
+  background-color: var(--colorNeutralStroke1);
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.titleText {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.iconFabricSmall {
+  font-family: 'Fabric MDL2 Assets';
+  font-size: 12px;
+}
+
+.searchBarContainer {
+  flex: 2;
+  max-width: 600px;
+  margin: 0 2rem;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--colorNeutralBackground2);
+  border-radius: 4px;
+}
+
+.searchIcon {
+  font-family: 'Fabric MDL2 Assets';
+  font-size: 16px;
+}
+
+.searchText {
+  color: var(--colorNeutralForeground3);
+}
+
+.headerRightSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profileImage {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.navigationSection {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: var(--colorNeutralBackground1);
+  border-bottom: 1px solid var(--colorNeutralStroke1);
+}
+
+.tabsContainer {
+  display: flex;
+  align-items: center;
+}
+
+.tabs {
+  display: flex;
+  gap: 2rem;
+}
+
+.tab {
+  padding: 0.5rem 0;
+  cursor: pointer;
+}
+
+.activeTab {
+  padding: 0.5rem 0;
+  position: relative;
+  color: var(--colorBrandForeground1);
+  cursor: pointer;
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--colorBrandForeground1);
+}
+
+.actionButtons {
+  display: flex;
+  gap: 1rem;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--colorNeutralStroke1);
+  border-radius: 4px;
+  background-color: transparent;
+  color: var(--colorNeutralForeground1);
+  cursor: pointer;
+}
+
+.buttonIcon {
+  font-family: 'Fabric MDL2 Assets';
+  font-size: 16px;
+}
+
+.buttonIconBlue {
+  font-family: 'Fabric MDL2 Assets';
+  font-size: 16px;
+  color: var(--colorBrandForeground1);
+}
+
+.contentSection {
+  flex: 1;
+  padding: 2rem;
+  background-color: var(--colorNeutralBackground2);
+}
+
+.drawer {
+  background-color: var(--colorNeutralBackground1);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.drawerHeader {
+  padding: 1rem;
+  border-bottom: 1px solid var(--colorNeutralStroke1);
+}
+
+.drawerTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.settingsButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: none;
+  background-color: transparent;
+  color: var(--colorNeutralForeground1);
+  cursor: pointer;
+}
+
+.settingsIcon {
+  font-family: 'Fabric MDL2 Assets';
+  font-size: 16px;
+}
+
+.drawerContent {
+  padding: 1rem;
+}
+
+.tileGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.themeToggle {
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--colorNeutralForeground1);
+  border: 1px solid var(--colorNeutralStroke1);
+}
+
+.container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container h1 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: var(--colorNeutralForeground1);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+} 
