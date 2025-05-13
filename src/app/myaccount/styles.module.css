@@ -1,0 +1,334 @@
+.root {
+  display: flex;
+  min-height: 100vh;
+}
+
+.nav {
+  flex-shrink: 0;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: var(--colorNeutralBackground1);
+}
+
+.darkContainer {
+  background-color: var(--colorNeutralBackground1);
+  color: var(--colorNeutralForeground1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.headerLeft,
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mainContent {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--colorNeutralForeground1);
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.wideCardGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.welcomeSection {
+  margin-bottom: 40px;
+}
+
+.welcomeTitle {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: var(--colorNeutralForeground1);
+}
+
+.profileContainer {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  background: var(--colorNeutralBackground2);
+  border-radius: 8px;
+}
+
+.profileImage {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+}
+
+.profileInfo {
+  flex: 1;
+}
+
+.profileName {
+  margin-bottom: 16px;
+}
+
+.nameHeader {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--colorNeutralForeground1);
+}
+
+.employeeInfo {
+  display: flex;
+  gap: 48px;
+  margin-bottom: 16px;
+}
+
+.infoColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.infoItem {
+  color: var(--colorNeutralForeground2);
+}
+
+.editLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--colorBrandForeground1);
+  cursor: pointer;
+}
+
+.helpIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.appsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.manageButton {
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid var(--colorNeutralStroke1);
+  border-radius: 4px;
+  color: var(--colorNeutralForeground1);
+  cursor: pointer;
+}
+
+.appsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.setupCard {
+  flex: 1;
+  min-width: 240px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow:
+    0px 0.3px 0.9px rgba(0, 0, 0, 0.1),
+    0px 1.6px 3.6px rgba(0, 0, 0, 0.13);
+  padding: 16px;
+  min-height: 221px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.securityCard,
+.discoveryCard {
+  flex: 1;
+  min-width: 240px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow:
+    0px 2px 4px rgba(0, 0, 0, 0.14),
+    0px 0px 2px rgba(0, 0, 0, 0.12);
+  padding: 12px;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.cardImage {
+  width: 128px;
+  height: 128px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.cardTitle {
+  font-family:
+    "Open Sans",
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #242424;
+  margin-bottom: 8px;
+}
+
+.cardDescription {
+  font-family:
+    "Open Sans",
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 16px;
+  color: #424242;
+  line-height: 22px;
+}
+
+.appCard {
+  flex: 1;
+  min-width: 240px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow:
+    0px 0.3px 0.9px rgba(0, 0, 0, 0.1),
+    0px 1.6px 3.6px rgba(0, 0, 0, 0.13);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.appIcon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.appName {
+  font-family:
+    "Open Sans",
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #242424;
+}
+
+/* Dark theme support */
+.darkContainer .welcomeTitle,
+.darkContainer .sectionTitle {
+  color: #e1e1e1;
+}
+
+.darkContainer .profileName,
+.darkContainer .nameHeader {
+  color: #e1e1e1;
+}
+
+.darkContainer .infoItem {
+  color: #c8c8c8;
+}
+
+.darkContainer .editLink {
+  color: #4ea0ff;
+}
+
+.darkContainer .setupCard,
+.darkContainer .securityCard,
+.darkContainer .discoveryCard,
+.darkContainer .appCard {
+  background-color: #292929;
+  box-shadow:
+    0px 0.3px 0.9px rgba(255, 255, 255, 0.05),
+    0px 1.6px 3.6px rgba(255, 255, 255, 0.07);
+}
+
+.darkContainer .cardTitle,
+.darkContainer .appName {
+  color: #e1e1e1;
+}
+
+.darkContainer .cardDescription {
+  color: #c8c8c8;
+}
+
+.darkContainer .manageButton {
+  background-color: #2b2b2b;
+  border-color: #444444;
+  color: #e1e1e1;
+}
+
+@media (max-width: 991px) {
+  .profileContainer {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .profileInfo {
+    width: 100%;
+  }
+
+  .infoColumn {
+    width: 100%;
+  }
+
+  .cardGrid,
+  .wideCardGrid {
+    flex-direction: column;
+  }
+
+  .wideCardGrid > * {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .setupCard,
+  .securityCard,
+  .discoveryCard,
+  .appCard {
+    width: 100%;
+  }
+}
