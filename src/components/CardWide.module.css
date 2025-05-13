@@ -1,7 +1,6 @@
 .container {
   display: flex;
-  width: 513px;
-  height: 221px;
+  min-height: 221px;
   align-items: flex-start;
   gap: 13px;
   background-color: #fff;
@@ -11,7 +10,6 @@
 }
 
 .containerNoBar {
-  width: 450px;
   gap: 0;
 }
 
@@ -44,7 +42,6 @@
 
 .content {
   display: flex;
-  width: 417px;
   padding: 10px 0px;
   align-items: flex-start;
   gap: 15px;

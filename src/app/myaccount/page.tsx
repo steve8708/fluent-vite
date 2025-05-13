@@ -1,8 +1,7 @@
 "use client";
 
 import * as React from "react";
-import CardSquare from "@/components/CardSquare";
-import { CardWide } from "@/components";
+import { CardSquare, CardWide } from "@/components";
 import {
   AppItem,
   Hamburger,
