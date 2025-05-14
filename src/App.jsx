@@ -5,6 +5,7 @@ import viteLogo from '/vite.svg'
 import MyApps from './pages/MyApps'
 import MyAccount from './pages/MyAccount'
 import CardDemo from './pages/CardDemo'
+import MyApps2 from './pages/MyApps2'
 import './App.css'
 
 function App() {
@@ -15,12 +16,14 @@ function App() {
       <nav style={{ marginBottom: '1rem' }}>
         <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
         <Link to="/myapps" style={{ marginRight: '1rem' }}>My Apps</Link>
+        <Link to="/myapps2" style={{ marginRight: '1rem' }}>My Apps 2</Link>
         <Link to="/myaccount" style={{ marginRight: '1rem' }}>My Account</Link>
         <Link to="/card-demo" style={{ marginRight: '1rem' }}>Card Demo</Link>
       </nav>
 
       <Routes>
         <Route path="/myapps" element={<MyApps />} />
+        <Route path="/myapps2" element={<MyApps2 />} />
         <Route path="/myaccount" element={<MyAccount />} />
         <Route path="/card-demo" element={<CardDemo />} />
         <Route path="/" element={

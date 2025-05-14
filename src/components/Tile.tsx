@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import { useTheme, FluentThemeProvider } from '@/theme/ThemeProvider';
+// import Image from "next/image";
+import { useTheme, FluentThemeProvider } from "../theme/ThemeProvider";
 import { mergeClasses, tokens, useId, Theme } from "@fluentui/react-components";
 
 export interface TileProps {
