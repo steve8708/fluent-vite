@@ -52,6 +52,7 @@ const Tile: React.FC<TileProps> = ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "center",
     width: "161px",
     height: "140px",
     padding: "16px 10px",
@@ -63,6 +64,7 @@ const Tile: React.FC<TileProps> = ({
     boxShadow:
       "rgba(0, 0, 0, 0.1) 0px 0.3px 0.9px 0px, rgba(0, 0, 0, 0.13) 0px 1.6px 3.6px 0px",
     position: "relative",
+    gap: "8px"
   };
 
   // Styles for hover state
@@ -75,7 +77,6 @@ const Tile: React.FC<TileProps> = ({
   const imageContainerStyle: React.CSSProperties = {
     width: "60px",
     height: "60px",
-    marginBottom: "8px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -85,18 +86,17 @@ const Tile: React.FC<TileProps> = ({
 
   // Styles for the text
   const textStyle: React.CSSProperties = {
-    flex: 1,
     color: isDark ? "#e1e1e1" : "#323130",
     textAlign: "center",
     fontFamily: "'Open Sans', -apple-system, Roboto, Helvetica, sans-serif",
     fontSize: "14px",
     fontWeight: "400",
     lineHeight: "20px",
-    height: "40px",
     width: "100%",
     display: "flex",
     justifyContent: "center",
-    alignItems: "flex-start",
+    alignItems: "center",
+    minHeight: "40px"
   };
 
   // Styles for the icons

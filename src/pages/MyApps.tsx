@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import styles from "./styles.module.css";
+import styles from "./MyApps.module.css";
 import Tile from "../components/Tile";
 import { Button, tokens } from "@fluentui/react-components";
 import { useTheme } from "../theme/ThemeProvider";
