@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Tooltip } from "@fluentui/react-components";
+import { useTheme } from "../theme/ThemeProvider";
 import styles from "./CardSquare.module.css";
 
 export type CardVariant = "security" | "discovery" | "app" | "setup";
@@ -59,16 +60,19 @@ export const CardSquare: React.FC<CardSquareProps> = ({
   showTooltip = false,
   tooltipContent = "",
 }) => {
+  const { themeMode } = useTheme();
+  const isDark = themeMode === "dark";
+
   const cardElement = (
     <div
-      className={`${styles.cardBase} ${styles[`card${variant.charAt(0).toUpperCase() + variant.slice(1)}`]} ${className}`}
+      className={`${styles.cardBase} ${styles[`card${variant.charAt(0).toUpperCase() + variant.slice(1)}`]} ${className} ${isDark ? styles.darkCard : ""}`}
       onClick={onClick}
     >
       {variant === "app" ? (
         // App-specific layout
         <>
           <img src={imageUrl} alt={imageAlt} className={styles.appIcon} />
-          {title && <span className={styles.appName}>{title}</span>}
+          {title && <span className={`${styles.appName} ${isDark ? styles.darkText : ""}`}>{title}</span>}
         </>
       ) : variant === "setup" ? (
         // Setup card layout - just centered image
@@ -77,9 +81,9 @@ export const CardSquare: React.FC<CardSquareProps> = ({
         // Standard layout for security and discovery cards
         <div className={styles.cardContent}>
           <img src={imageUrl} alt={imageAlt} className={styles.cardImage} />
-          {title && <h3 className={styles.cardTitle}>{title}</h3>}
+          {title && <h3 className={`${styles.cardTitle} ${isDark ? styles.darkText : ""}`}>{title}</h3>}
           {description && (
-            <p className={styles.cardDescription}>{description}</p>
+            <p className={`${styles.cardDescription} ${isDark ? styles.darkText : ""}`}>{description}</p>
           )}
         </div>
       )}

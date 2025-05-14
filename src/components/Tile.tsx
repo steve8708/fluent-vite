@@ -64,13 +64,22 @@ const Tile: React.FC<TileProps> = ({
     boxShadow:
       "rgba(0, 0, 0, 0.1) 0px 0.3px 0.9px 0px, rgba(0, 0, 0, 0.13) 0px 1.6px 3.6px 0px",
     position: "relative",
-    gap: "8px"
   };
 
   // Styles for hover state
   const hoverStyle = {
     boxShadow: tokens.shadow8,
     border: `1px solid ${isDark ? "#666666" : tokens.colorNeutralStroke1Hover}`,
+  };
+
+  // Styles for the content container
+  const contentContainerStyle: React.CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
+    gap: "8px",
   };
 
   // Styles for the image container
@@ -96,7 +105,6 @@ const Tile: React.FC<TileProps> = ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    minHeight: "40px"
   };
 
   // Styles for the icons
@@ -145,18 +153,20 @@ const Tile: React.FC<TileProps> = ({
             <i className="ti ti-dots-vertical" />
           </div>
         )}
-        <div style={imageContainerStyle}>
-          <img
-            src={imageUrl}
-            alt={imageAlt}
-            style={{
-              maxWidth: "100%",
-              maxHeight: "100%",
-              objectFit: "contain",
-            }}
-          />
+        <div style={contentContainerStyle}>
+          <div style={imageContainerStyle}>
+            <img
+              src={imageUrl}
+              alt={imageAlt}
+              style={{
+                maxWidth: "100%",
+                maxHeight: "100%",
+                objectFit: "contain",
+              }}
+            />
+          </div>
+          <div style={textStyle}>{text}</div>
         </div>
-        <div style={textStyle}>{text}</div>
       </div>
     </>
   );

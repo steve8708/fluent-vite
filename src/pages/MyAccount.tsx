@@ -3,6 +3,7 @@
 import * as React from "react";
 import CardSquare from "../components/CardSquare";
 import { CardWide } from "../components";
+import Tile from "../components/Tile";
 import {
   AppItem,
   Hamburger,
@@ -298,40 +299,35 @@ export default function MyAccountPage() {
               <button className={styles.manageButton}>Manage apps</button>
             </div>
             <div className={styles.appsGrid}>
-              <CardSquare
+              <Tile
                 imageUrl="https://cdn.builder.io/api/v1/image/assets/375626aef9734fa5a388227cc2b6eab1/371493c6ab83e8eaf2e291e62293fd162aef8078?placeholderIfAbsent=true"
                 imageAlt="Copilot"
-                title="Copilot M365"
-                variant="app"
-                className={styles.appCard}
+                text="Copilot M365"
+                className={styles.appTile}
               />
-              <CardSquare
+              <Tile
                 imageUrl="https://cdn.builder.io/api/v1/image/assets/375626aef9734fa5a388227cc2b6eab1/72fd7e8d3f5759fa1f1ac716575d590a47dfa3b4?placeholderIfAbsent=true"
                 imageAlt="Adobe"
-                title="Adobe Identity Manager"
-                variant="app"
-                className={styles.appCard}
+                text="Adobe Identity Manager"
+                className={styles.appTile}
               />
-              <CardSquare
+              <Tile
                 imageUrl="https://cdn.builder.io/api/v1/image/assets/375626aef9734fa5a388227cc2b6eab1/2889686ceaa928b2cdcd5ccc798cc0b8e8ee28f2?placeholderIfAbsent=true"
                 imageAlt="DocuSign"
-                title="DocuSign"
-                variant="app"
-                className={styles.appCard}
+                text="DocuSign"
+                className={styles.appTile}
               />
-              <CardSquare
+              <Tile
                 imageUrl="https://cdn.builder.io/api/v1/image/assets/375626aef9734fa5a388227cc2b6eab1/ed3daa32726733a10c8e39bbe1daa4cb9a92aa1e?placeholderIfAbsent=true"
                 imageAlt="Dropbox"
-                title="Dropbox Business"
-                variant="app"
-                className={styles.appCard}
+                text="Dropbox Business"
+                className={styles.appTile}
               />
-              <CardSquare
+              <Tile
                 imageUrl="https://cdn.builder.io/api/v1/image/assets/375626aef9734fa5a388227cc2b6eab1/a6da422f16b3919d0fa3b0541df6d7c541cdac74?placeholderIfAbsent=true"
                 imageAlt="Workday"
-                title="Workday"
-                variant="app"
-                className={styles.appCard}
+                text="Workday"
+                className={styles.appTile}
               />
             </div>
           </section>
