@@ -4,6 +4,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import MyApps from './pages/MyApps'
 import MyAccount from './pages/MyAccount'
+import CardWidePage from './pages/CardWidePage'
 import './App.css'
 
 function App() {
@@ -14,12 +15,14 @@ function App() {
       <nav style={{ marginBottom: '1rem' }}>
         <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
         <Link to="/myapps" style={{ marginRight: '1rem' }}>My Apps</Link>
-        <Link to="/myaccount">My Account</Link>
+        <Link to="/myaccount" style={{ marginRight: '1rem' }}>My Account</Link>
+        <Link to="/card-wide">Card Wide</Link>
       </nav>
 
       <Routes>
         <Route path="/myapps" element={<MyApps />} />
         <Route path="/myaccount" element={<MyAccount />} />
+        <Route path="/card-wide" element={<CardWidePage />} />
         <Route path="/" element={
           <>
             <div>
