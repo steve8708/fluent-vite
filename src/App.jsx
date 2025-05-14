@@ -2,10 +2,9 @@ import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import MyApps from './pages/MyApps'
 import MyAccount from './pages/MyAccount'
 import CardDemo from './pages/CardDemo'
-import MyApps2 from './pages/MyApps2'
+import MyApps from './pages/MyApps'
 import { FluentThemeProvider } from './theme/ThemeProvider'
 import './App.css'
 
@@ -16,7 +15,6 @@ function App() {
     <FluentThemeProvider>
       <Routes>
         <Route path="/myapps" element={<MyApps />} />
-        <Route path="/myapps2" element={<MyApps2 />} />
         <Route path="/myaccount" element={<MyAccount />} />
         <Route path="/card-demo" element={<CardDemo />} />
         <Route path="/" element={
