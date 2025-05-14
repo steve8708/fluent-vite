@@ -1,26 +1,19 @@
 import { useState } from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import MyApps from './pages/MyApps'
 import MyAccount from './pages/MyAccount'
 import CardDemo from './pages/CardDemo'
 import MyApps2 from './pages/MyApps2'
+import { FluentThemeProvider } from './theme/ThemeProvider'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <nav style={{ marginBottom: '1rem' }}>
-        <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
-        <Link to="/myapps" style={{ marginRight: '1rem' }}>My Apps</Link>
-        <Link to="/myapps2" style={{ marginRight: '1rem' }}>My Apps 2</Link>
-        <Link to="/myaccount" style={{ marginRight: '1rem' }}>My Account</Link>
-        <Link to="/card-demo" style={{ marginRight: '1rem' }}>Card Demo</Link>
-      </nav>
-
+    <FluentThemeProvider>
       <Routes>
         <Route path="/myapps" element={<MyApps />} />
         <Route path="/myapps2" element={<MyApps2 />} />
@@ -51,7 +44,7 @@ function App() {
           </>
         } />
       </Routes>
-    </>
+    </FluentThemeProvider>
   )
 }
 

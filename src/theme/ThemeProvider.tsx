@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, createContext, useContext, useState, useEffect } from "react";
+import React, { ReactNode, createContext, useContext, useState, useEffect } from "react";
 import {
   FluentProvider,
   webLightTheme,
@@ -61,7 +61,16 @@ export const FluentThemeProvider = ({
   return (
     <ThemeContext.Provider value={{ themeMode, toggleTheme, setThemeMode }}>
       <SSRProvider>
-        <FluentProvider theme={theme}>{children}</FluentProvider>
+        <FluentProvider 
+          theme={theme} 
+          style={{ 
+            minHeight: '100vh',
+            backgroundColor: themeMode === 'dark' ? theme.colorNeutralBackground1 : theme.colorNeutralBackground1,
+            color: themeMode === 'dark' ? theme.colorNeutralForeground1 : theme.colorNeutralForeground1
+          }}
+        >
+          {children}
+        </FluentProvider>
       </SSRProvider>
     </ThemeContext.Provider>
   );

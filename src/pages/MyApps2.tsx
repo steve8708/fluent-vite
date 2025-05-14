@@ -3,7 +3,7 @@
 import React from "react";
 import styles from "./styles.module.css";
 import Tile from "../components/Tile";
-import { Button } from "@fluentui/react-components";
+import { Button, tokens } from "@fluentui/react-components";
 import { useTheme } from "../theme/ThemeProvider";
 
 // Separate ThemeToggle component to access the theme context
@@ -15,7 +15,10 @@ const ThemeToggle = () => {
       appearance="subtle"
       icon={<i className={`ti ti-${themeMode === "light" ? "moon" : "sun"}`} />}
       onClick={toggleTheme}
-      className={styles.themeToggle}
+      style={{
+        color: tokens.colorNeutralForeground1,
+        backgroundColor: 'transparent'
+      }}
     >
       {themeMode === "light" ? "Dark mode" : "Light mode"}
     </Button>
