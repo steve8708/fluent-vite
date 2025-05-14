@@ -1,6 +1,12 @@
 "use client";
 
-import React, { ReactNode, createContext, useContext, useState, useEffect } from "react";
+import React, {
+  ReactNode,
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
 import {
   FluentProvider,
   webLightTheme,
@@ -35,18 +41,12 @@ export const FluentThemeProvider = ({
   defaultTheme = "light",
 }: ThemeProviderProps) => {
   const [themeMode, setThemeMode] = useState<ThemeMode>(defaultTheme);
-  
+
   useEffect(() => {
     // Check for saved preference
     const savedTheme = localStorage.getItem("themeMode") as ThemeMode;
     if (savedTheme) {
       setThemeMode(savedTheme);
-    } else {
-      // Check system preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (prefersDark) {
-        setThemeMode("dark");
-      }
     }
   }, []);
 
@@ -61,12 +61,18 @@ export const FluentThemeProvider = ({
   return (
     <ThemeContext.Provider value={{ themeMode, toggleTheme, setThemeMode }}>
       <SSRProvider>
-        <FluentProvider 
-          theme={theme} 
-          style={{ 
-            minHeight: '100vh',
-            backgroundColor: themeMode === 'dark' ? theme.colorNeutralBackground1 : theme.colorNeutralBackground1,
-            color: themeMode === 'dark' ? theme.colorNeutralForeground1 : theme.colorNeutralForeground1
+        <FluentProvider
+          theme={theme}
+          style={{
+            minHeight: "100vh",
+            backgroundColor:
+              themeMode === "dark"
+                ? theme.colorNeutralBackground1
+                : theme.colorNeutralBackground1,
+            color:
+              themeMode === "dark"
+                ? theme.colorNeutralForeground1
+                : theme.colorNeutralForeground1,
           }}
         >
           {children}
