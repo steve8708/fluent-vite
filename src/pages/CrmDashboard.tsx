@@ -560,7 +560,7 @@ const CrmDashboard: React.FC = () => {
                   variant="xxLarge"
                   style={{
                     textAlign: "center",
-                    paddingTop: "50px",
+                    height: "80px",
                     fontSize: "38px",
                   }}
                 >
@@ -579,7 +579,7 @@ const CrmDashboard: React.FC = () => {
                   variant="xxLarge"
                   style={{
                     textAlign: "center",
-                    paddingTop: "50px",
+                    height: "80px",
                     fontSize: "38px",
                   }}
                 >
@@ -603,7 +603,7 @@ const CrmDashboard: React.FC = () => {
                   variant="xxLarge"
                   style={{
                     textAlign: "center",
-                    paddingTop: "50px",
+                    height: "80px",
                     fontSize: "38px",
                   }}
                 >
@@ -622,7 +622,7 @@ const CrmDashboard: React.FC = () => {
                   variant="xxLarge"
                   style={{
                     textAlign: "center",
-                    paddingTop: "50px",
+                    height: "80px",
                     fontSize: "38px",
                   }}
                 >
