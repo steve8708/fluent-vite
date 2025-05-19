@@ -562,6 +562,9 @@ const CrmDashboard: React.FC = () => {
                     textAlign: "center",
                     height: "80px",
                     fontSize: "38px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
                   {users.length}
@@ -581,6 +584,9 @@ const CrmDashboard: React.FC = () => {
                     textAlign: "center",
                     height: "80px",
                     fontSize: "38px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
                   {users.length
@@ -605,6 +611,9 @@ const CrmDashboard: React.FC = () => {
                     textAlign: "center",
                     height: "80px",
                     fontSize: "38px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
                   {new Set(users.map((user) => user.location.country)).size}
@@ -624,6 +633,9 @@ const CrmDashboard: React.FC = () => {
                     textAlign: "center",
                     height: "80px",
                     fontSize: "38px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
                   5
