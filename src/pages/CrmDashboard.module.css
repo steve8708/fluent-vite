@@ -1,0 +1,266 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f8f8f8;
+}
+
+.header {
+  width: 100%;
+  height: 64px;
+  background-color: #fff;
+  border-bottom: 1px solid #e6e6e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.headerContent {
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+}
+
+.headerRight {
+  display: flex;
+  gap: 12px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #323130;
+  margin: 0;
+}
+
+.content {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.statsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+}
+
+.statCard {
+  flex: 1;
+  min-width: 200px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.statPreview {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chartsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+}
+
+.donutChart {
+  flex: 1;
+  min-width: 300px;
+}
+
+.lineChart {
+  flex: 2;
+  min-width: 500px;
+}
+
+.chartPreview {
+  height: 300px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userListContainer {
+  margin-top: 16px;
+}
+
+.searchBox {
+  width: 300px;
+}
+
+.userCountInfo {
+  padding: 8px 16px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.userTable {
+  width: 100%;
+}
+
+.userDetailImage {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.pivotContent {
+  padding: 20px 0;
+}
+
+.detailItem {
+  margin-bottom: 16px;
+}
+
+.detailSection {
+  background-color: #f8f8f8;
+  padding: 12px;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.activityFeed {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.activityCard {
+  margin-bottom: 12px;
+}
+
+.dealItem {
+  background-color: #f8f8f8;
+  padding: 16px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.dealProgress {
+  margin: 12px 0;
+}
+
+.dealValue {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.noteItem {
+  background-color: #f8f8f8;
+  padding: 16px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.noteHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.addNote {
+  margin-top: 16px;
+}
+
+.userDetails {
+  padding: 16px;
+}
+
+/* Dark theme styles */
+.darkContainer {
+  background-color: #1f1f1f;
+  color: #ffffff;
+}
+
+.darkContainer .header {
+  background-color: #292929;
+  border-bottom-color: #444444;
+}
+
+.darkContainer .title {
+  color: #ffffff;
+}
+
+.darkContainer .statCard,
+.darkContainer .donutChart > div,
+.darkContainer .lineChart > div,
+.darkContainer .userListContainer > div {
+  background-color: #292929;
+}
+
+.darkContainer .detailSection,
+.darkContainer .dealItem,
+.darkContainer .noteItem {
+  background-color: #292929;
+}
+
+.darkContainer .userCountInfo {
+  border-bottom-color: #444444;
+}
+
+/* Responsive styles */
+@media (max-width: 991px) {
+  .statsContainer {
+    flex-direction: column;
+  }
+
+  .chartsContainer {
+    flex-direction: column;
+  }
+
+  .statCard,
+  .donutChart,
+  .lineChart {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .headerContent {
+    flex-direction: column;
+    gap: 12px;
+    padding: 8px;
+  }
+
+  .header {
+    height: auto;
+    padding: 12px 0;
+  }
+
+  .headerRight {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .searchBox {
+    width: 100%;
+  }
+
+  .content {
+    padding: 12px;
+  }
+}
