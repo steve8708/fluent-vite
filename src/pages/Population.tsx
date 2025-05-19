@@ -39,6 +39,135 @@ interface ApiResponse {
   source: any[];
 }
 
+// Create a simple bar chart without using FluentUI charting library
+const SimpleBarChart: React.FC<{ data: PopulationData[] }> = ({ data }) => {
+  const { themeMode } = useTheme();
+  const isDark = themeMode === "dark";
+
+  // Find the maximum population value for scaling
+  const maxPopulation = Math.max(...data.map((item) => item.Population));
+
+  return (
+    <div className={styles.simpleChart}>
+      <div className={styles.chartBars}>
+        {data.map((item) => (
+          <div key={item.Year} className={styles.barContainer}>
+            <div
+              className={styles.bar}
+              style={{
+                height: `${(item.Population / maxPopulation) * 100}%`,
+                backgroundColor: isDark
+                  ? tokens.colorBrandForeground1
+                  : tokens.colorBrandBackground,
+              }}
+              title={`${item.Year}: ${item.Population.toLocaleString()}`}
+            />
+            <div className={styles.barLabel}>{item.Year}</div>
+          </div>
+        ))}
+      </div>
+      <div className={styles.yAxis}>
+        <div className={styles.yAxisLabel}>
+          {Math.floor(maxPopulation / 1000000)}M
+        </div>
+        <div className={styles.yAxisLabel}>
+          {Math.floor(maxPopulation / 2000000)}M
+        </div>
+        <div className={styles.yAxisLabel}>0</div>
+      </div>
+    </div>
+  );
+};
+
+// Create a simple line chart without using FluentUI charting library
+const SimpleLineChart: React.FC<{ data: PopulationData[] }> = ({ data }) => {
+  const { themeMode } = useTheme();
+  const isDark = themeMode === "dark";
+
+  // Find min and max years and populations for scaling
+  const years = data.map((item) => parseInt(item.Year));
+  const minYear = Math.min(...years);
+  const maxYear = Math.max(...years);
+  const yearRange = maxYear - minYear;
+
+  const populations = data.map((item) => item.Population);
+  const minPopulation = Math.min(...populations);
+  const maxPopulation = Math.max(...populations);
+  const populationRange = maxPopulation - minPopulation;
+
+  // Calculate points for the SVG polyline
+  const points = data
+    .map((item, index) => {
+      const x = ((parseInt(item.Year) - minYear) / yearRange) * 100;
+      const y =
+        100 - ((item.Population - minPopulation) / populationRange) * 100;
+      return `${x}%,${y}%`;
+    })
+    .join(" ");
+
+  return (
+    <div className={styles.simpleChart}>
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+      >
+        <polyline
+          points={points}
+          fill="none"
+          stroke={
+            isDark ? tokens.colorBrandForeground1 : tokens.colorBrandBackground
+          }
+          strokeWidth="2"
+        />
+        {data.map((item, index) => {
+          const x = ((parseInt(item.Year) - minYear) / yearRange) * 100;
+          const y =
+            100 - ((item.Population - minPopulation) / populationRange) * 100;
+          return (
+            <circle
+              key={item.Year}
+              cx={`${x}%`}
+              cy={`${y}%`}
+              r="2"
+              fill={
+                isDark
+                  ? tokens.colorBrandForeground1
+                  : tokens.colorBrandBackground
+              }
+            />
+          );
+        })}
+      </svg>
+      <div className={styles.xAxis}>
+        {data.map((item) => (
+          <div
+            key={item.Year}
+            className={styles.xAxisLabel}
+            style={{
+              left: `${((parseInt(item.Year) - minYear) / yearRange) * 100}%`,
+            }}
+          >
+            {item.Year}
+          </div>
+        ))}
+      </div>
+      <div className={styles.yAxis}>
+        <div className={styles.yAxisLabel}>
+          {Math.floor(maxPopulation / 1000000)}M
+        </div>
+        <div className={styles.yAxisLabel}>
+          {Math.floor((maxPopulation + minPopulation) / 2000000)}M
+        </div>
+        <div className={styles.yAxisLabel}>
+          {Math.floor(minPopulation / 1000000)}M
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Population: React.FC = () => {
   const { themeMode } = useTheme();
   const isDarkMode = themeMode === "dark";
@@ -90,89 +219,6 @@ const Population: React.FC = () => {
   // Calculate growth rate between two population values
   const calculateGrowthRate = (current: number, previous: number): number => {
     return ((current - previous) / previous) * 100;
-  };
-
-  // Define chart theme with necessary font properties
-  const chartTheme = {
-    palette: {
-      // Adjust colors based on theme
-      neutralLighterAlt: isDarkMode ? "#3c3c3c" : "#faf9f8",
-      neutralLighter: isDarkMode ? "#333333" : "#f3f2f1",
-      neutralLight: isDarkMode ? "#292929" : "#edebe9",
-      neutralQuaternaryAlt: isDarkMode ? "#232323" : "#e1dfdd",
-      neutralQuaternary: isDarkMode ? "#1f1f1f" : "#d0d0d0",
-      neutralTertiaryAlt: isDarkMode ? "#1c1c1c" : "#c8c6c4",
-      neutralTertiary: isDarkMode ? "#a19f9d" : "#a19f9d",
-      neutralSecondary: isDarkMode ? "#c8c6c4" : "#605e5c",
-      neutralPrimaryAlt: isDarkMode ? "#dadada" : "#3b3a39",
-      neutralPrimary: isDarkMode ? "#ffffff" : "#323130",
-      neutralDark: isDarkMode ? "#f4f4f4" : "#201f1e",
-      black: isDarkMode ? "#f8f8f8" : "#000000",
-      white: isDarkMode ? "#121212" : "#ffffff",
-    },
-    fonts: {
-      // Add required font properties
-      tiny: { fontFamily: "Segoe UI, sans-serif", fontSize: "10px" },
-      xSmall: { fontFamily: "Segoe UI, sans-serif", fontSize: "11px" },
-      small: { fontFamily: "Segoe UI, sans-serif", fontSize: "12px" },
-      medium: { fontFamily: "Segoe UI, sans-serif", fontSize: "14px" },
-      mediumPlus: { fontFamily: "Segoe UI, sans-serif", fontSize: "16px" },
-      large: { fontFamily: "Segoe UI, sans-serif", fontSize: "18px" },
-      xLarge: { fontFamily: "Segoe UI, sans-serif", fontSize: "20px" },
-      xxLarge: { fontFamily: "Segoe UI, sans-serif", fontSize: "22px" },
-    },
-  };
-
-  // Prepare data for bar chart
-  const prepareBarChartData = (): IVerticalBarChartProps => {
-    const chartPoints: IDataPoint[] = populationData.map((item) => ({
-      x: item.Year,
-      y: item.Population,
-      color: isDarkMode
-        ? tokens.colorBrandForeground1
-        : tokens.colorBrandBackground,
-    }));
-
-    return {
-      chartTitle: "US Population by Year",
-      data: chartPoints,
-      culture: "en-US",
-      height: 300,
-      width: "100%",
-      hideLegend: true,
-      hideTooltip: false,
-      enableReflow: true,
-      yAxisTickFormat: (y: number) => {
-        return `${(y / 1000000).toFixed(1)}M`;
-      },
-      tooltipProps: {
-        YValueFormat: (y: number) => formatNumber(y),
-      },
-      theme: chartTheme,
-    };
-  };
-
-  // Prepare data for line chart
-  const prepareLineChartData = (): ILineChartPoints[] => {
-    // Create data points for the line chart
-    const linePoints: ILineChartDataPoint[] = populationData.map((item) => ({
-      x: new Date(parseInt(item.Year), 0, 1),
-      y: item.Population,
-      data: item.Year,
-    }));
-
-    return [
-      {
-        legend: "Population",
-        data: linePoints,
-        color: isDarkMode
-          ? tokens.colorBrandForeground1
-          : tokens.colorBrandForeground1,
-        lineOptions: {
-          strokeWidth: 3,
-        },
-      },
-    ];
   };
 
   const getGrowthBadgeColor = (rate: number): string => {
@@ -290,33 +336,8 @@ const Population: React.FC = () => {
               <CardHeader
                 header={<Text weight="semibold">Population Growth Trend</Text>}
               />
-              <div className={styles.chart}>
-                <LineChart
-                  data={prepareLineChartData()}
-                  height={300}
-                  width="100%"
-                  enableReflow={true}
-                  yAxisTickFormat={(y: number) =>
-                    `${(y / 1000000).toFixed(0)}M`
-                  }
-                  legendProps={{
-                    allowFocusOnLegends: true,
-                    styles: {
-                      text: {
-                        color: isDarkMode
-                          ? tokens.colorNeutralForeground1
-                          : tokens.colorNeutralForeground1,
-                      },
-                    },
-                  }}
-                  tickLabelFontSize={12}
-                  tickParams={{
-                    stroke: isDarkMode
-                      ? tokens.colorNeutralForeground3
-                      : tokens.colorNeutralForeground3,
-                  }}
-                  theme={chartTheme}
-                />
+              <div className={styles.chartWrapper}>
+                <SimpleLineChart data={populationData} />
               </div>
             </Card>
 
@@ -324,8 +345,8 @@ const Population: React.FC = () => {
               <CardHeader
                 header={<Text weight="semibold">Population by Year</Text>}
               />
-              <div className={styles.chart}>
-                <VerticalBarChart {...prepareBarChartData()} />
+              <div className={styles.chartWrapper}>
+                <SimpleBarChart data={populationData} />
               </div>
             </Card>
           </div>
