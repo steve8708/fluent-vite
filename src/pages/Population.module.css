@@ -1,10 +1,20 @@
+/* Outer container for the whole page */
+.outerContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Container for dashboard content */
 .container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
   background-color: var(--colorNeutralBackground1);
   color: var(--colorNeutralForeground1);
-  min-height: 100vh;
+  width: 100%;
+  flex: 1;
 }
 
 .darkContainer {
@@ -12,7 +22,111 @@
   color: var(--colorNeutralForeground1);
 }
 
+/* Header styles copied from MyApps */
 .header {
+  width: 100%;
+  height: 48px;
+  background-color: #f3f2f1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.headerLeftSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.headerLeftGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.headerIcon {
+  display: flex;
+  width: 48px;
+  height: 48px;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconFabric {
+  color: #616161;
+  font-size: 16px;
+  font-family: "Fabric MDL2 Assets";
+}
+
+.iconFabricSmall {
+  color: #616161;
+  font-size: 12px;
+  font-family: "Fabric MDL2 Assets";
+}
+
+.microsoftLogo {
+  width: 108px;
+  height: 23px;
+}
+
+.headerDivider {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dividerVertical {
+  width: 1px;
+  height: 24px;
+  background-color: #616161;
+}
+
+.headerTitle {
+  display: flex;
+  height: 48px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  align-items: center;
+  gap: 6px;
+  margin-left: 9px;
+}
+
+.titleText {
+  color: #616161;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.searchBarContainer {
+  position: relative;
+  width: 492px;
+}
+
+.searchBarSvg {
+  width: 100%;
+  height: 48px;
+}
+
+.headerRightSection {
+  display: flex;
+  align-items: center;
+}
+
+.profileImage {
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  margin: 0 8px;
+}
+
+/* Dashboard header */
+.dashboardHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -219,10 +333,37 @@
   font-style: italic;
 }
 
+/* Dark theme support for header */
+.darkContainer .header {
+  background-color: #292929;
+}
+
+.darkContainer .titleText,
+.darkContainer .iconFabric,
+.darkContainer .iconFabricSmall {
+  color: #e1e1e1;
+}
+
+.darkContainer .dividerVertical {
+  background-color: #555555;
+}
+
+.darkContainer .searchBarSvg path {
+  fill: #292929;
+}
+
+.darkContainer .searchBarSvg text {
+  fill: #e1e1e1;
+}
+
 /* Media queries for responsiveness */
 @media screen and (max-width: 992px) {
   .chartSection {
     grid-template-columns: 1fr;
+  }
+
+  .searchBarContainer {
+    width: 300px;
   }
 }
 
@@ -231,7 +372,7 @@
     padding: 1rem;
   }
 
-  .header {
+  .dashboardHeader {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -251,7 +392,11 @@
   }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 640px) {
+  .searchBarContainer {
+    display: none;
+  }
+
   .chartCard {
     min-height: 300px;
   }
