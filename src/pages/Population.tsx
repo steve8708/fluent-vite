@@ -11,7 +11,6 @@ import {
   Badge,
   MessageBar,
   MessageBarBody,
-  MessageBarIntent,
 } from "@fluentui/react-components";
 import {
   VerticalBarChart,
@@ -93,6 +92,37 @@ const Population: React.FC = () => {
     return ((current - previous) / previous) * 100;
   };
 
+  // Define chart theme with necessary font properties
+  const chartTheme = {
+    palette: {
+      // Adjust colors based on theme
+      neutralLighterAlt: isDarkMode ? "#3c3c3c" : "#faf9f8",
+      neutralLighter: isDarkMode ? "#333333" : "#f3f2f1",
+      neutralLight: isDarkMode ? "#292929" : "#edebe9",
+      neutralQuaternaryAlt: isDarkMode ? "#232323" : "#e1dfdd",
+      neutralQuaternary: isDarkMode ? "#1f1f1f" : "#d0d0d0",
+      neutralTertiaryAlt: isDarkMode ? "#1c1c1c" : "#c8c6c4",
+      neutralTertiary: isDarkMode ? "#a19f9d" : "#a19f9d",
+      neutralSecondary: isDarkMode ? "#c8c6c4" : "#605e5c",
+      neutralPrimaryAlt: isDarkMode ? "#dadada" : "#3b3a39",
+      neutralPrimary: isDarkMode ? "#ffffff" : "#323130",
+      neutralDark: isDarkMode ? "#f4f4f4" : "#201f1e",
+      black: isDarkMode ? "#f8f8f8" : "#000000",
+      white: isDarkMode ? "#121212" : "#ffffff",
+    },
+    fonts: {
+      // Add required font properties
+      tiny: { fontFamily: "Segoe UI, sans-serif", fontSize: "10px" },
+      xSmall: { fontFamily: "Segoe UI, sans-serif", fontSize: "11px" },
+      small: { fontFamily: "Segoe UI, sans-serif", fontSize: "12px" },
+      medium: { fontFamily: "Segoe UI, sans-serif", fontSize: "14px" },
+      mediumPlus: { fontFamily: "Segoe UI, sans-serif", fontSize: "16px" },
+      large: { fontFamily: "Segoe UI, sans-serif", fontSize: "18px" },
+      xLarge: { fontFamily: "Segoe UI, sans-serif", fontSize: "20px" },
+      xxLarge: { fontFamily: "Segoe UI, sans-serif", fontSize: "22px" },
+    },
+  };
+
   // Prepare data for bar chart
   const prepareBarChartData = (): IVerticalBarChartProps => {
     const chartPoints: IDataPoint[] = populationData.map((item) => ({
@@ -105,7 +135,6 @@ const Population: React.FC = () => {
 
     return {
       chartTitle: "US Population by Year",
-      // Fix: Change from object with chartData property to an array
       data: chartPoints,
       culture: "en-US",
       height: 300,
@@ -119,24 +148,7 @@ const Population: React.FC = () => {
       tooltipProps: {
         YValueFormat: (y: number) => formatNumber(y),
       },
-      theme: {
-        palette: {
-          // Adjust colors based on theme
-          neutralLighterAlt: isDarkMode ? "#3c3c3c" : "#faf9f8",
-          neutralLighter: isDarkMode ? "#333333" : "#f3f2f1",
-          neutralLight: isDarkMode ? "#292929" : "#edebe9",
-          neutralQuaternaryAlt: isDarkMode ? "#232323" : "#e1dfdd",
-          neutralQuaternary: isDarkMode ? "#1f1f1f" : "#d0d0d0",
-          neutralTertiaryAlt: isDarkMode ? "#1c1c1c" : "#c8c6c4",
-          neutralTertiary: isDarkMode ? "#a19f9d" : "#a19f9d",
-          neutralSecondary: isDarkMode ? "#c8c6c4" : "#605e5c",
-          neutralPrimaryAlt: isDarkMode ? "#dadada" : "#3b3a39",
-          neutralPrimary: isDarkMode ? "#ffffff" : "#323130",
-          neutralDark: isDarkMode ? "#f4f4f4" : "#201f1e",
-          black: isDarkMode ? "#f8f8f8" : "#000000",
-          white: isDarkMode ? "#121212" : "#ffffff",
-        },
-      },
+      theme: chartTheme,
     };
   };
 
@@ -303,23 +315,7 @@ const Population: React.FC = () => {
                       ? tokens.colorNeutralForeground3
                       : tokens.colorNeutralForeground3,
                   }}
-                  theme={{
-                    palette: {
-                      neutralLighterAlt: isDarkMode ? "#3c3c3c" : "#faf9f8",
-                      neutralLighter: isDarkMode ? "#333333" : "#f3f2f1",
-                      neutralLight: isDarkMode ? "#292929" : "#edebe9",
-                      neutralQuaternaryAlt: isDarkMode ? "#232323" : "#e1dfdd",
-                      neutralQuaternary: isDarkMode ? "#1f1f1f" : "#d0d0d0",
-                      neutralTertiaryAlt: isDarkMode ? "#1c1c1c" : "#c8c6c4",
-                      neutralTertiary: isDarkMode ? "#a19f9d" : "#a19f9d",
-                      neutralSecondary: isDarkMode ? "#c8c6c4" : "#605e5c",
-                      neutralPrimaryAlt: isDarkMode ? "#dadada" : "#3b3a39",
-                      neutralPrimary: isDarkMode ? "#ffffff" : "#323130",
-                      neutralDark: isDarkMode ? "#f4f4f4" : "#201f1e",
-                      black: isDarkMode ? "#f8f8f8" : "#000000",
-                      white: isDarkMode ? "#121212" : "#ffffff",
-                    },
-                  }}
+                  theme={chartTheme}
                 />
               </div>
             </Card>
