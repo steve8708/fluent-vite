@@ -41,15 +41,8 @@ import {
   CardPreview,
   CardFooter,
 } from "@fluentui/react-components";
-import {
-  AreaChart,
-  IChartProps,
-  ILineChartPoints,
-  DonutChart,
-  IDonutChartData,
-} from "@fluentui/react-charting";
-import { useTheme } from "../theme/ThemeProvider";
 import styles from "./CrmDashboard.module.css";
+import { useTheme } from "../theme/ThemeProvider";
 
 interface IUser {
   id: string;
@@ -258,83 +251,6 @@ const CrmDashboard: React.FC = () => {
     },
   });
 
-  // Statistics data
-  const getGenderStats = (): IDonutChartData[] => {
-    // Ensure we have user data before calculating
-    if (!users || users.length === 0) {
-      return [
-        { key: "Male", data: 25, color: theme.palette.blue },
-        { key: "Female", data: 25, color: theme.palette.magenta },
-      ];
-    }
-
-    const maleCount = users.filter((user) => user.gender === "male").length;
-    const femaleCount = users.filter((user) => user.gender === "female").length;
-
-    // Ensure we always return non-zero values to render the chart
-    return [
-      {
-        key: "Male",
-        data: maleCount || 1, // Fallback to 1 if count is 0
-        color: theme.palette.blue,
-      },
-      {
-        key: "Female",
-        data: femaleCount || 1, // Fallback to 1 if count is 0
-        color: theme.palette.magenta,
-      },
-    ];
-  };
-
-  const getAgeDistribution = (): ILineChartPoints[] => {
-    const ageGroups = {
-      "18-30": 0,
-      "31-40": 0,
-      "41-50": 0,
-      "51-60": 0,
-      "60+": 0,
-    };
-
-    // Fill with sample data if no users
-    if (!users || users.length === 0) {
-      return [
-        { x: "18-30", y: 12 },
-        { x: "31-40", y: 18 },
-        { x: "41-50", y: 15 },
-        { x: "51-60", y: 8 },
-        { x: "60+", y: 5 },
-      ];
-    }
-
-    users.forEach((user) => {
-      const age = user.dob.age;
-      if (age <= 30) ageGroups["18-30"]++;
-      else if (age <= 40) ageGroups["31-40"]++;
-      else if (age <= 50) ageGroups["41-50"]++;
-      else if (age <= 60) ageGroups["51-60"]++;
-      else ageGroups["60+"]++;
-    });
-
-    return Object.keys(ageGroups).map((group) => ({
-      x: group,
-      y: ageGroups[group as keyof typeof ageGroups],
-    }));
-  };
-
-  const getAgeChartData = (): IChartProps => {
-    const data = getAgeDistribution();
-    return {
-      chartTitle: "Age Distribution",
-      lineChartData: [
-        {
-          legend: "Age Groups",
-          data,
-          color: theme.palette.blue,
-        },
-      ],
-    };
-  };
-
   // Helper functions
   const getRandomPresence = (): PersonaPresence => {
     const presences = [
@@ -411,6 +327,187 @@ const CrmDashboard: React.FC = () => {
   };
 
   const stackTokens: IStackTokens = { childrenGap: 16 };
+
+  // Direct DOM/SVG rendering for the Gender Distribution chart
+  const renderGenderChart = () => {
+    const maleCount = 28;
+    const femaleCount = 22;
+    const total = maleCount + femaleCount;
+    const malePercentage = Math.round((maleCount / total) * 100);
+    const femalePercentage = Math.round((femaleCount / total) * 100);
+
+    return (
+      <div
+        style={{
+          height: "300px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <svg width="200" height="200" viewBox="0 0 100 100">
+          {/* Male slice (blue) */}
+          <path
+            d="M50,50 L50,0 A50,50 0 0,1 95,65 L50,50"
+            fill={theme.palette.blue}
+          />
+          {/* Female slice (magenta) */}
+          <path
+            d="M50,50 L95,65 A50,50 0 0,1 15,80 L50,50"
+            fill={theme.palette.magenta}
+          />
+          {/* Additional slices would go here */}
+          <path
+            d="M50,50 L15,80 A50,50 0 0,1 50,0 L50,50"
+            fill={theme.palette.tealLight}
+          />
+          {/* Center circle (white hole) */}
+          <circle
+            cx="50"
+            cy="50"
+            r="30"
+            fill={isDark ? "#1f1f1f" : "#ffffff"}
+          />
+        </svg>
+        <div
+          style={{
+            marginTop: "20px",
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-around",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <div
+              style={{
+                width: "12px",
+                height: "12px",
+                backgroundColor: theme.palette.blue,
+                marginRight: "8px",
+              }}
+            ></div>
+            <span>Male ({malePercentage}%)</span>
+          </div>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <div
+              style={{
+                width: "12px",
+                height: "12px",
+                backgroundColor: theme.palette.magenta,
+                marginRight: "8px",
+              }}
+            ></div>
+            <span>Female ({femalePercentage}%)</span>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Direct DOM/SVG rendering for the Age Distribution chart
+  const renderAgeChart = () => {
+    const data = [
+      { x: "18-30", y: 12 },
+      { x: "31-40", y: 18 },
+      { x: "41-50", y: 15 },
+      { x: "51-60", y: 8 },
+      { x: "60+", y: 5 },
+    ];
+
+    const maxValue = Math.max(...data.map((item) => item.y));
+    const chartHeight = 200;
+    const barWidth = 40;
+    const spacing = 30;
+    const totalWidth = (barWidth + spacing) * data.length;
+
+    return (
+      <div
+        style={{
+          height: "300px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <svg width={totalWidth} height={chartHeight + 40}>
+          {/* Y-axis */}
+          <line
+            x1="0"
+            y1="0"
+            x2="0"
+            y2={chartHeight}
+            stroke={isDark ? "#888" : "#aaa"}
+          />
+
+          {/* X-axis */}
+          <line
+            x1="0"
+            y1={chartHeight}
+            x2={totalWidth}
+            y2={chartHeight}
+            stroke={isDark ? "#888" : "#aaa"}
+          />
+
+          {/* Bars */}
+          {data.map((item, index) => {
+            const barHeight = (item.y / maxValue) * chartHeight;
+            const x = index * (barWidth + spacing) + spacing / 2;
+            const y = chartHeight - barHeight;
+
+            return (
+              <g key={index}>
+                <rect
+                  x={x}
+                  y={y}
+                  width={barWidth}
+                  height={barHeight}
+                  fill={theme.palette.blue}
+                  opacity={0.7}
+                />
+                <text
+                  x={x + barWidth / 2}
+                  y={chartHeight + 20}
+                  textAnchor="middle"
+                  fill={isDark ? "#fff" : "#333"}
+                  fontSize="12"
+                >
+                  {item.x}
+                </text>
+                <text
+                  x={x + barWidth / 2}
+                  y={y - 5}
+                  textAnchor="middle"
+                  fill={isDark ? "#fff" : "#333"}
+                  fontSize="12"
+                >
+                  {item.y}
+                </text>
+              </g>
+            );
+          })}
+
+          {/* Legend */}
+          <rect
+            x={totalWidth - 110}
+            y={chartHeight + 25}
+            width="12"
+            height="12"
+            fill={theme.palette.blue}
+          />
+          <text
+            x={totalWidth - 90}
+            y={chartHeight + 35}
+            fill={isDark ? "#fff" : "#333"}
+            fontSize="12"
+          >
+            Age Groups
+          </text>
+        </svg>
+      </div>
+    );
+  };
 
   return (
     <div className={`${styles.container} ${darkClass}`}>
@@ -550,23 +647,7 @@ const CrmDashboard: React.FC = () => {
                   header={<Text variant="large">Gender Distribution</Text>}
                 />
                 <CardPreview className={styles.chartPreview}>
-                  <DonutChart
-                    data={[
-                      { key: "Male", data: 28, color: theme.palette.blue },
-                      { key: "Female", data: 22, color: theme.palette.magenta },
-                    ]}
-                    innerRadius={70}
-                    hideLabels={false}
-                    height={300}
-                    width={300}
-                    legendsOverflowText={""}
-                    legendProps={{
-                      allowFocusOnLegends: true,
-                      styles: {
-                        text: { color: isDark ? "#fff" : "#333" },
-                      },
-                    }}
-                  />
+                  {renderGenderChart()}
                 </CardPreview>
               </Card>
             </Stack.Item>
@@ -577,36 +658,7 @@ const CrmDashboard: React.FC = () => {
                   header={<Text variant="large">Age Distribution</Text>}
                 />
                 <CardPreview className={styles.chartPreview}>
-                  <AreaChart
-                    data={{
-                      chartTitle: "Age Distribution",
-                      lineChartData: [
-                        {
-                          legend: "Age Groups",
-                          data: [
-                            { x: "18-30", y: 12 },
-                            { x: "31-40", y: 18 },
-                            { x: "41-50", y: 15 },
-                            { x: "51-60", y: 8 },
-                            { x: "60+", y: 5 },
-                          ],
-                          color: theme.palette.blue,
-                        },
-                      ],
-                    }}
-                    height={300}
-                    width={550}
-                    legendsOverflowText={"Overflow Items"}
-                    ignoreMissingVales={true}
-                    yAxisTickCount={5}
-                    yAxisTickFormat={(tick) => tick.toString()}
-                    legendProps={{
-                      allowFocusOnLegends: true,
-                      styles: {
-                        text: { color: isDark ? "#fff" : "#333" },
-                      },
-                    }}
-                  />
+                  {renderAgeChart()}
                 </CardPreview>
               </Card>
             </Stack.Item>
