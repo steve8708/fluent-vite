@@ -461,7 +461,11 @@ const CrmDashboard: React.FC = () => {
               <CardPreview className={styles.statPreview}>
                 <Text
                   variant="xxLarge"
-                  style={{ textAlign: "center", paddingTop: "70px" }}
+                  style={{
+                    textAlign: "center",
+                    paddingTop: "50px",
+                    fontSize: "38px",
+                  }}
                 >
                   {users.length}
                 </Text>
@@ -476,7 +480,11 @@ const CrmDashboard: React.FC = () => {
               <CardPreview className={styles.statPreview}>
                 <Text
                   variant="xxLarge"
-                  style={{ textAlign: "center", paddingTop: "70px" }}
+                  style={{
+                    textAlign: "center",
+                    paddingTop: "50px",
+                    fontSize: "38px",
+                  }}
                 >
                   {users.length
                     ? Math.round(
@@ -496,7 +504,11 @@ const CrmDashboard: React.FC = () => {
               <CardPreview className={styles.statPreview}>
                 <Text
                   variant="xxLarge"
-                  style={{ textAlign: "center", paddingTop: "70px" }}
+                  style={{
+                    textAlign: "center",
+                    paddingTop: "50px",
+                    fontSize: "38px",
+                  }}
                 >
                   {new Set(users.map((user) => user.location.country)).size}
                 </Text>
@@ -511,7 +523,11 @@ const CrmDashboard: React.FC = () => {
               <CardPreview className={styles.statPreview}>
                 <Text
                   variant="xxLarge"
-                  style={{ textAlign: "center", paddingTop: "70px" }}
+                  style={{
+                    textAlign: "center",
+                    paddingTop: "50px",
+                    fontSize: "38px",
+                  }}
                 >
                   5
                 </Text>
@@ -535,7 +551,10 @@ const CrmDashboard: React.FC = () => {
                 />
                 <CardPreview className={styles.chartPreview}>
                   <DonutChart
-                    data={getGenderStats()}
+                    data={[
+                      { key: "Male", data: 28, color: theme.palette.blue },
+                      { key: "Female", data: 22, color: theme.palette.magenta },
+                    ]}
                     innerRadius={70}
                     hideLabels={false}
                     height={300}
@@ -559,7 +578,22 @@ const CrmDashboard: React.FC = () => {
                 />
                 <CardPreview className={styles.chartPreview}>
                   <AreaChart
-                    data={getAgeChartData()}
+                    data={{
+                      chartTitle: "Age Distribution",
+                      lineChartData: [
+                        {
+                          legend: "Age Groups",
+                          data: [
+                            { x: "18-30", y: 12 },
+                            { x: "31-40", y: 18 },
+                            { x: "41-50", y: 15 },
+                            { x: "51-60", y: 8 },
+                            { x: "60+", y: 5 },
+                          ],
+                          color: theme.palette.blue,
+                        },
+                      ],
+                    }}
                     height={300}
                     width={550}
                     legendsOverflowText={"Overflow Items"}
