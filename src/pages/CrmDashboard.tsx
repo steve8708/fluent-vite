@@ -439,7 +439,12 @@ const CrmDashboard: React.FC = () => {
                 header={<Text variant="large">Total Contacts</Text>}
               />
               <CardPreview className={styles.statPreview}>
-                <Text variant="xxLarge">{users.length}</Text>
+                <Text
+                  variant="xxLarge"
+                  style={{ textAlign: "center", paddingTop: "70px" }}
+                >
+                  {users.length}
+                </Text>
               </CardPreview>
               <CardFooter>
                 <Text>Active customer database</Text>
@@ -449,7 +454,10 @@ const CrmDashboard: React.FC = () => {
             <Card className={styles.statCard}>
               <CardHeader header={<Text variant="large">Average Age</Text>} />
               <CardPreview className={styles.statPreview}>
-                <Text variant="xxLarge">
+                <Text
+                  variant="xxLarge"
+                  style={{ textAlign: "center", paddingTop: "70px" }}
+                >
                   {users.length
                     ? Math.round(
                         users.reduce((sum, user) => sum + user.dob.age, 0) /
@@ -466,7 +474,10 @@ const CrmDashboard: React.FC = () => {
             <Card className={styles.statCard}>
               <CardHeader header={<Text variant="large">Countries</Text>} />
               <CardPreview className={styles.statPreview}>
-                <Text variant="xxLarge">
+                <Text
+                  variant="xxLarge"
+                  style={{ textAlign: "center", paddingTop: "70px" }}
+                >
                   {new Set(users.map((user) => user.location.country)).size}
                 </Text>
               </CardPreview>
@@ -478,7 +489,12 @@ const CrmDashboard: React.FC = () => {
             <Card className={styles.statCard}>
               <CardHeader header={<Text variant="large">New Today</Text>} />
               <CardPreview className={styles.statPreview}>
-                <Text variant="xxLarge">5</Text>
+                <Text
+                  variant="xxLarge"
+                  style={{ textAlign: "center", paddingTop: "70px" }}
+                >
+                  5
+                </Text>
               </CardPreview>
               <CardFooter>
                 <Text>Recent additions</Text>
