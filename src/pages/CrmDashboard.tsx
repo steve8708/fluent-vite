@@ -42,11 +42,10 @@ import {
   CardFooter,
 } from "@fluentui/react-components";
 import {
-  AreaChart,
-  IChartProps,
   ILineChartPoints,
   PieChart,
-  IPieChartData,
+  VerticalBarChart,
+  IVerticalBarChartDataPoint,
 } from "@fluentui/react-charting";
 import { useTheme } from "../theme/ThemeProvider";
 import styles from "./CrmDashboard.module.css";
@@ -343,28 +342,49 @@ const CrmDashboard: React.FC = () => {
     ];
   };
 
-  const getAgeDistribution = (): ILineChartPoints[] => {
+  const getAgeDistribution = (): IVerticalBarChartDataPoint[] => {
     return [
-      { x: "18-30", y: 12 },
-      { x: "31-40", y: 18 },
-      { x: "41-50", y: 15 },
-      { x: "51-60", y: 8 },
-      { x: "60+", y: 5 },
+      {
+        x: "18-30",
+        y: 12,
+        legend: "Age Groups",
+        color: theme.palette.blue,
+        xAxisCalloutData: "18-30",
+        yAxisCalloutData: "12",
+      },
+      {
+        x: "31-40",
+        y: 18,
+        legend: "Age Groups",
+        color: theme.palette.blue,
+        xAxisCalloutData: "31-40",
+        yAxisCalloutData: "18",
+      },
+      {
+        x: "41-50",
+        y: 15,
+        legend: "Age Groups",
+        color: theme.palette.blue,
+        xAxisCalloutData: "41-50",
+        yAxisCalloutData: "15",
+      },
+      {
+        x: "51-60",
+        y: 8,
+        legend: "Age Groups",
+        color: theme.palette.blue,
+        xAxisCalloutData: "51-60",
+        yAxisCalloutData: "8",
+      },
+      {
+        x: "60+",
+        y: 5,
+        legend: "Age Groups",
+        color: theme.palette.blue,
+        xAxisCalloutData: "60+",
+        yAxisCalloutData: "5",
+      },
     ];
-  };
-
-  const getAgeChartData = (): IChartProps => {
-    const data = getAgeDistribution();
-    return {
-      chartTitle: "Age Distribution",
-      lineChartData: [
-        {
-          legend: "Age Groups",
-          data,
-          color: theme.palette.blue,
-        },
-      ],
-    };
   };
 
   return (
@@ -539,14 +559,13 @@ const CrmDashboard: React.FC = () => {
                   header={<Text variant="large">Age Distribution</Text>}
                 />
                 <CardPreview className={styles.chartPreview}>
-                  <AreaChart
-                    data={getAgeChartData()}
+                  <VerticalBarChart
+                    data={getAgeDistribution()}
                     height={300}
                     width={550}
-                    legendsOverflowText={"Overflow Items"}
-                    ignoreMissingVales={true}
-                    yAxisTickCount={5}
-                    yAxisTickFormat={(tick) => tick.toString()}
+                    enableAnimation={true}
+                    hideLabels={false}
+                    hideLegend={false}
                     legendProps={{
                       allowFocusOnLegends: true,
                       styles: {
