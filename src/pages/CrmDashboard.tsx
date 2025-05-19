@@ -45,8 +45,8 @@ import {
   AreaChart,
   IChartProps,
   ILineChartPoints,
-  DonutChart,
-  IDonutChartData,
+  PieChart,
+  IPieChartData,
 } from "@fluentui/react-charting";
 import { useTheme } from "../theme/ThemeProvider";
 import styles from "./CrmDashboard.module.css";
@@ -336,18 +336,10 @@ const CrmDashboard: React.FC = () => {
   const stackTokens: IStackTokens = { childrenGap: 16 };
 
   // Statistics data
-  const getGenderStats = (): IDonutChartData[] => {
+  const getGenderStats = () => {
     return [
-      {
-        key: "Male",
-        data: 28,
-        color: theme.palette.blue,
-      },
-      {
-        key: "Female",
-        data: 22,
-        color: theme.palette.magenta,
-      },
+      { y: 28, x: "Male", color: theme.palette.blue },
+      { y: 22, x: "Female", color: theme.palette.magenta },
     ];
   };
 
@@ -525,13 +517,11 @@ const CrmDashboard: React.FC = () => {
                   header={<Text variant="large">Gender Distribution</Text>}
                 />
                 <CardPreview className={styles.chartPreview}>
-                  <DonutChart
+                  <PieChart
                     data={getGenderStats()}
-                    innerRadius={70}
-                    hideLabels={false}
                     height={300}
                     width={300}
-                    legendsOverflowText={""}
+                    allowFocusOnLegend
                     legendProps={{
                       allowFocusOnLegends: true,
                       styles: {
