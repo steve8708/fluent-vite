@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   Button,
   Spinner,
-  MessageBar,
-  MessageBarType,
   Card,
   CardHeader,
   Text,
@@ -11,6 +9,9 @@ import {
   Subtitle1,
   tokens,
   Badge,
+  MessageBar,
+  MessageBarBody,
+  MessageBarIntent,
 } from "@fluentui/react-components";
 import {
   VerticalBarChart,
@@ -196,8 +197,10 @@ const Population: React.FC = () => {
           <Spinner label="Loading population data..." />
         </div>
       ) : error ? (
-        <MessageBar messageBarType={MessageBarType.error}>
-          Error loading data: {error}. Please try refreshing the page.
+        <MessageBar intent="error">
+          <MessageBarBody>
+            Error loading data: {error}. Please try refreshing the page.
+          </MessageBarBody>
         </MessageBar>
       ) : (
         <div className={styles.content}>
