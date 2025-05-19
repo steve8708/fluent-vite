@@ -20,7 +20,6 @@ import {
   ILineChartDataPoint,
   LineChart,
   ILineChartPoints,
-  ChartHoverCard,
 } from "@fluentui/react-charting";
 import { useTheme } from "../theme/ThemeProvider";
 import { ArrowSync24Regular } from "@fluentui/react-icons";
@@ -106,9 +105,8 @@ const Population: React.FC = () => {
 
     return {
       chartTitle: "US Population by Year",
-      data: {
-        chartData: chartPoints,
-      },
+      // Fix: Change from object with chartData property to an array
+      data: chartPoints,
       culture: "en-US",
       height: 300,
       width: "100%",
