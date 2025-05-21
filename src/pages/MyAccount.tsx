@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import CardSquare from "../components/CardSquare";
-import { CardWide } from "../components";
+import { CardWide, TrackCard } from "../components";
 import Tile from "../components/Tile";
 import {
   AppItem,
@@ -231,6 +231,26 @@ export default function MyAccountPage() {
                 showButton={false}
               />
             </div>
+          </section>
+
+          <section className={styles.section}>
+            <TrackCard
+              title="Keep track"
+              items={[
+                {
+                  icon: "https://cdn.builder.io/api/v1/image/assets/f5348105e75441b59830f1e489577801/8ecd51881a856b8ca0de27eb7764228a5a73410a?placeholderIfAbsent=true",
+                  label: "Approve group requests",
+                  count: "4 requests",
+                  onClick: () => console.log("Approve group requests clicked"),
+                },
+                {
+                  icon: "https://cdn.builder.io/api/v1/image/assets/f5348105e75441b59830f1e489577801/bd3cb93f3ea4f4a468cb4a9fbd08504240c6bec8?placeholderIfAbsent=true",
+                  label: "Extend expiring groups",
+                  count: "4 expiring",
+                  onClick: () => console.log("Extend expiring groups clicked"),
+                },
+              ]}
+            />
           </section>
 
           <section className={styles.section}>
