@@ -210,12 +210,20 @@
   margin-bottom: 24px;
 }
 
-/* Users Grid */
-.usersGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-  margin-top: 20px;
+/* Table Container */
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow:
+    0 1.6px 3.6px 0 rgba(0, 0, 0, 0.132),
+    0 0.3px 0.9px 0 rgba(0, 0, 0, 0.108);
+}
+
+.usersTable {
+  width: 100%;
+  border-collapse: collapse;
 }
 
 /* Loading and Error States */
@@ -270,6 +278,11 @@
   border-color: #36363636 #36363636 #444444;
 }
 
+.darkContainer .tableContainer {
+  background-color: #292929;
+  box-shadow: 0 1.6px 3.6px 0 rgba(0, 0, 0, 0.25);
+}
+
 /* Media queries */
 @media (max-width: 991px) {
   .searchBarContainer {
@@ -278,18 +291,12 @@
 
   .content {
     width: 100%;
-  }
-
-  .usersGrid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    padding-left: 8px;
+    padding-right: 8px;
   }
 }
 
 @media (max-width: 768px) {
-  .usersGrid {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  }
-
   .sortContainer {
     display: none;
   }
@@ -300,7 +307,7 @@
     display: none;
   }
 
-  .usersGrid {
-    grid-template-columns: 1fr;
+  .tableContainer {
+    overflow-x: auto;
   }
 }

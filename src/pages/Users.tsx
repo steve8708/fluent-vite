@@ -7,15 +7,28 @@ import {
   Button,
   Spinner,
   tokens,
-  Dialog,
   Input,
   Dropdown,
   Option,
-  Field,
   Text,
+  Table,
+  TableHeader,
+  TableRow,
+  TableHeaderCell,
+  TableBody,
+  TableCell,
+  TableCellLayout,
+  Avatar,
+  Dialog,
+  DialogTrigger,
+  DialogSurface,
+  DialogBody,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Field,
+  Badge,
 } from "@fluentui/react-components";
-import UserCard from "../components/UserCard";
-import UserEditModal from "../components/UserEditModal";
 
 // Separate ThemeToggle component to access the theme context
 const ThemeToggle = () => {
@@ -95,6 +108,20 @@ const MainContent = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("name");
+  const [formData, setFormData] = useState({
+    title: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    gender: "",
+    street: "",
+    streetNumber: "",
+    city: "",
+    state: "",
+    country: "",
+    postcode: "",
+  });
 
   // Fetch users from API
   useEffect(() => {
@@ -158,17 +185,77 @@ const MainContent = () => {
 
   const handleEditUser = (user: User) => {
     setSelectedUser(user);
+    setFormData({
+      title: user.name.title,
+      firstName: user.name.first,
+      lastName: user.name.last,
+      email: user.email,
+      phone: user.phone,
+      gender: user.gender,
+      street: user.location.street.name,
+      streetNumber: user.location.street.number.toString(),
+      city: user.location.city,
+      state: user.location.state,
+      country: user.location.country,
+      postcode: user.location.postcode.toString(),
+    });
     setIsEditModalOpen(true);
   };
 
-  const handleSaveUser = (updatedUser: User) => {
+  const handleSaveUser = () => {
+    if (!selectedUser) return;
+
+    const updatedUser: User = {
+      ...selectedUser,
+      name: {
+        title: formData.title,
+        first: formData.firstName,
+        last: formData.lastName,
+      },
+      email: formData.email,
+      phone: formData.phone,
+      gender: formData.gender,
+      location: {
+        ...selectedUser.location,
+        street: {
+          number: Number(formData.streetNumber),
+          name: formData.street,
+        },
+        city: formData.city,
+        state: formData.state,
+        country: formData.country,
+        postcode: formData.postcode,
+      },
+    };
+
     setUsers((prevUsers) =>
       prevUsers.map((user) =>
         user.login.uuid === updatedUser.login.uuid ? updatedUser : user,
       ),
     );
+
     setIsEditModalOpen(false);
   };
+
+  // Handle input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Handle dropdown changes
+  const handleDropdownChange =
+    (field: string) => (_: any, data: { selectedOptions: string[] }) => {
+      if (data.selectedOptions.length > 0) {
+        setFormData((prev) => ({
+          ...prev,
+          [field]: data.selectedOptions[0],
+        }));
+      }
+    };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -369,22 +456,78 @@ const MainContent = () => {
               </Button>
             </div>
           ) : (
-            <div className={styles.usersGrid}>
-              {filteredUsers.length > 0 ? (
-                filteredUsers.map((user) => (
-                  <UserCard
-                    key={user.login.uuid}
-                    user={user}
-                    onEdit={() => handleEditUser(user)}
-                  />
-                ))
-              ) : (
-                <div className={styles.noResults}>
-                  <Text size={400}>
-                    No users found matching your search criteria.
-                  </Text>
-                </div>
-              )}
+            <div className={styles.tableContainer}>
+              <Table aria-label="Users table" className={styles.usersTable}>
+                <TableHeader>
+                  <TableRow>
+                    <TableHeaderCell>User</TableHeaderCell>
+                    <TableHeaderCell>Email</TableHeaderCell>
+                    <TableHeaderCell>Phone</TableHeaderCell>
+                    <TableHeaderCell>Location</TableHeaderCell>
+                    <TableHeaderCell>Gender</TableHeaderCell>
+                    <TableHeaderCell>Actions</TableHeaderCell>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {filteredUsers.length > 0 ? (
+                    filteredUsers.map((user) => (
+                      <TableRow key={user.login.uuid}>
+                        <TableCell>
+                          <TableCellLayout
+                            media={
+                              <Avatar
+                                image={{ src: user.picture.thumbnail }}
+                                name={`${user.name.first} ${user.name.last}`}
+                                size={32}
+                              />
+                            }
+                          >
+                            {user.name.title} {user.name.first} {user.name.last}
+                          </TableCellLayout>
+                        </TableCell>
+                        <TableCell>{user.email}</TableCell>
+                        <TableCell>{user.phone}</TableCell>
+                        <TableCell>
+                          <TableCellLayout>
+                            {user.location.city}, {user.location.country}
+                          </TableCellLayout>
+                        </TableCell>
+                        <TableCell>
+                          <Badge
+                            appearance={
+                              user.gender === "male" ? "filled" : "outline"
+                            }
+                            color={user.gender === "male" ? "brand" : "danger"}
+                            style={{ textTransform: "capitalize" }}
+                          >
+                            {user.gender}
+                          </Badge>
+                        </TableCell>
+                        <TableCell>
+                          <Button
+                            appearance="primary"
+                            icon={<i className="ti ti-pencil" />}
+                            size="small"
+                            onClick={() => handleEditUser(user)}
+                          >
+                            Edit
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={6}>
+                        <div className={styles.noResults}>
+                          <Text size={400}>
+                            No users found matching your search criteria.
+                          </Text>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
             </div>
           )}
         </div>
@@ -400,12 +543,163 @@ const MainContent = () => {
       />
 
       {selectedUser && (
-        <UserEditModal
-          user={selectedUser}
-          isOpen={isEditModalOpen}
-          onClose={() => setIsEditModalOpen(false)}
-          onSave={handleSaveUser}
-        />
+        <Dialog
+          open={isEditModalOpen}
+          onOpenChange={(_, data) => !data.open && setIsEditModalOpen(false)}
+        >
+          <DialogSurface>
+            <DialogBody>
+              <DialogTitle>Edit User</DialogTitle>
+              <DialogContent>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginBottom: "16px",
+                  }}
+                >
+                  <Avatar
+                    image={{ src: selectedUser.picture.large }}
+                    name={`${selectedUser.name.first} ${selectedUser.name.last}`}
+                    size={64}
+                  />
+                  <Text
+                    size={500}
+                    weight="semibold"
+                    style={{ marginLeft: "16px" }}
+                  >
+                    {selectedUser.name.first} {selectedUser.name.last}
+                  </Text>
+                </div>
+
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: "16px",
+                  }}
+                >
+                  <Field label="Title">
+                    <Dropdown
+                      value={formData.title}
+                      onOptionSelect={handleDropdownChange("title")}
+                    >
+                      <Option value="Mr">Mr</Option>
+                      <Option value="Ms">Ms</Option>
+                      <Option value="Mrs">Mrs</Option>
+                      <Option value="Dr">Dr</Option>
+                    </Dropdown>
+                  </Field>
+
+                  <Field label="Gender">
+                    <Dropdown
+                      value={formData.gender}
+                      onOptionSelect={handleDropdownChange("gender")}
+                    >
+                      <Option value="male">Male</Option>
+                      <Option value="female">Female</Option>
+                      <Option value="other">Other</Option>
+                    </Dropdown>
+                  </Field>
+
+                  <Field label="First Name" required>
+                    <Input
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                    />
+                  </Field>
+
+                  <Field label="Last Name" required>
+                    <Input
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                    />
+                  </Field>
+
+                  <Field label="Email" required>
+                    <Input
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      type="email"
+                    />
+                  </Field>
+
+                  <Field label="Phone">
+                    <Input
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      type="tel"
+                    />
+                  </Field>
+
+                  <Field label="Street Number">
+                    <Input
+                      name="streetNumber"
+                      value={formData.streetNumber}
+                      onChange={handleInputChange}
+                      type="number"
+                    />
+                  </Field>
+
+                  <Field label="Street">
+                    <Input
+                      name="street"
+                      value={formData.street}
+                      onChange={handleInputChange}
+                    />
+                  </Field>
+
+                  <Field label="City">
+                    <Input
+                      name="city"
+                      value={formData.city}
+                      onChange={handleInputChange}
+                    />
+                  </Field>
+
+                  <Field label="State/Region">
+                    <Input
+                      name="state"
+                      value={formData.state}
+                      onChange={handleInputChange}
+                    />
+                  </Field>
+
+                  <Field label="Country">
+                    <Input
+                      name="country"
+                      value={formData.country}
+                      onChange={handleInputChange}
+                    />
+                  </Field>
+
+                  <Field label="Postal Code">
+                    <Input
+                      name="postcode"
+                      value={formData.postcode}
+                      onChange={handleInputChange}
+                    />
+                  </Field>
+                </div>
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  appearance="secondary"
+                  onClick={() => setIsEditModalOpen(false)}
+                >
+                  Cancel
+                </Button>
+                <Button appearance="primary" onClick={handleSaveUser}>
+                  Save Changes
+                </Button>
+              </DialogActions>
+            </DialogBody>
+          </DialogSurface>
+        </Dialog>
       )}
     </>
   );
