@@ -56,10 +56,15 @@ export const FluentThemeProvider = ({
     localStorage.setItem("themeMode", newTheme);
   };
 
+  const updateThemeMode = (mode: ThemeMode) => {
+    setThemeMode(mode);
+    localStorage.setItem("themeMode", mode);
+  };
+
   const theme = themeMode === "light" ? webLightTheme : webDarkTheme;
 
   return (
-    <ThemeContext.Provider value={{ themeMode, toggleTheme, setThemeMode }}>
+    <ThemeContext.Provider value={{ themeMode, toggleTheme, setThemeMode: updateThemeMode }}>
       <SSRProvider>
         <FluentProvider
           theme={theme}

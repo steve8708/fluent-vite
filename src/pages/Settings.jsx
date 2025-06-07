@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTheme } from '../theme/ThemeProvider';
 import {
   makeStyles,
   tokens,
@@ -198,9 +199,9 @@ const useStyles = makeStyles({
 
 export default function Settings() {
   const styles = useStyles();
+  const { themeMode, setThemeMode } = useTheme();
   
-  // Theme settings
-  const [theme, setTheme] = useState('system');
+  // Other settings (not theme related)
   const [colorScheme, setColorScheme] = useState('blue');
   const [density, setDensity] = useState('normal');
   
@@ -226,7 +227,7 @@ export default function Settings() {
 
   const handleResetSettings = () => {
     // Reset to defaults
-    setTheme('system');
+    setThemeMode('light');
     setColorScheme('blue');
     setDensity('normal');
     setAnimations(true);
@@ -274,13 +275,12 @@ export default function Settings() {
               <div className={styles.settingControl}>
                 <div className={styles.radioGroupContainer}>
                   <RadioGroup 
-                    value={theme} 
-                    onChange={(e) => setTheme(e.target.value)}
+                    value={themeMode} 
+                    onChange={(e, data) => setThemeMode(data.value)}
                     layout="horizontal"
                   >
                     <Radio value="light" label="Light" />
                     <Radio value="dark" label="Dark" />
-                    <Radio value="system" label="Auto" />
                   </RadioGroup>
                 </div>
               </div>
