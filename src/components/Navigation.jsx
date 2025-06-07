@@ -26,21 +26,26 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: `${tokens.spacingVerticalM} ${tokens.spacingHorizontalL}`,
+    padding: `0 ${tokens.spacingHorizontalXXL}`,
     backgroundColor: tokens.colorNeutralBackground1,
     borderBottom: `1px solid ${tokens.colorNeutralStroke2}`,
-    height: '56px',
-    boxSizing: 'border-box'
+    height: '64px',
+    boxSizing: 'border-box',
+    boxShadow: tokens.shadow4,
+    position: 'sticky',
+    top: 0,
+    zIndex: 1000
   },
   navLeft: {
     display: 'flex',
     alignItems: 'center',
-    gap: tokens.spacingHorizontalL
+    gap: tokens.spacingHorizontalXXL
   },
   logo: {
     fontSize: tokens.fontSizeBase500,
     fontWeight: tokens.fontWeightSemibold,
-    color: tokens.colorBrandForeground1
+    color: tokens.colorBrandForeground1,
+    letterSpacing: '-0.01em'
   },
   navItems: {
     display: 'flex',
@@ -50,12 +55,31 @@ const useStyles = makeStyles({
   navRight: {
     display: 'flex',
     alignItems: 'center',
-    gap: tokens.spacingHorizontalM
+    gap: tokens.spacingHorizontalL
   },
   navButton: {
+    minHeight: '40px',
+    borderRadius: tokens.borderRadiusMedium,
+    fontWeight: tokens.fontWeightMedium,
+    transition: 'all 0.15s ease-in-out',
     '&[data-current="true"]': {
       backgroundColor: tokens.colorBrandBackground2,
-      color: tokens.colorBrandForeground2
+      color: tokens.colorBrandForeground2,
+      fontWeight: tokens.fontWeightSemibold
+    },
+    '&:hover': {
+      backgroundColor: tokens.colorNeutralBackground1Hover,
+      transform: 'translateY(-1px)'
+    },
+    '&[data-current="true"]:hover': {
+      backgroundColor: tokens.colorBrandBackground2Hover
+    }
+  },
+  avatarButton: {
+    borderRadius: tokens.borderRadiusCircular,
+    padding: tokens.spacingHorizontalXS,
+    '&:hover': {
+      backgroundColor: tokens.colorNeutralBackground1Hover
     }
   }
 });
@@ -79,7 +103,7 @@ export default function Navigation() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navLeft}>
-        <Body1 className={styles.logo}>Fluent UI Demo</Body1>
+        <Body1 className={styles.logo}>Fluent UI</Body1>
         <div className={styles.navItems}>
           {navigationItems.map((item) => {
             const IconComponent = item.icon;
@@ -106,13 +130,14 @@ export default function Navigation() {
           <MenuTrigger disableButtonEnhancement>
             <Button
               appearance="subtle"
-              icon={<Avatar name="User" size={28} />}
+              className={styles.avatarButton}
+              icon={<Avatar name="User" size={32} />}
             />
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItem icon={<PersonRegular />}>Profile</MenuItem>
-              <MenuItem icon={<SettingsRegular />}>Settings</MenuItem>
+              <MenuItem icon={<PersonRegular />}>View profile</MenuItem>
+              <MenuItem icon={<SettingsRegular />}>Account settings</MenuItem>
               <Divider />
               <MenuItem>Sign out</MenuItem>
             </MenuList>
