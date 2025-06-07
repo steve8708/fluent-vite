@@ -1,8 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
 
-import CardDemo from "./pages/CardDemo";
-import MyApps from "./pages/MyApps";
-import MyAccount from "./pages/MyAccount";
 import { FluentThemeProvider } from "./theme/ThemeProvider";
 import "./App.css";
 
@@ -10,10 +8,7 @@ function App() {
   return (
     <FluentThemeProvider>
       <Routes>
-        <Route path="/myapps" element={<MyApps />} />
-        <Route path="/myaccount" element={<MyAccount />} />
-        <Route path="/card-demo" element={<CardDemo />} />
-        <Route path="/" element={<MyApps />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </FluentThemeProvider>
   );
