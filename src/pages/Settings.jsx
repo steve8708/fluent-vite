@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useTheme } from '../theme/ThemeProvider';
+import React, { useState } from "react";
+import { useTheme } from "../theme/ThemeProvider";
 import {
   makeStyles,
   tokens,
@@ -19,217 +19,223 @@ import {
   Field,
   Slider,
   SpinButton,
-  Badge
-} from '@fluentui/react-components';
+  Badge,
+} from "@fluentui/react-components";
 import {
   DarkThemeRegular,
   BrightnessHighRegular,
   SettingsRegular,
   SaveRegular,
   ArrowCounterclockwiseRegular,
-  CheckmarkRegular
-} from '@fluentui/react-icons';
+  CheckmarkRegular,
+} from "@fluentui/react-icons";
 
 const useStyles = makeStyles({
   container: {
     backgroundColor: tokens.colorNeutralBackground1,
-    minHeight: 'calc(100vh - 64px)'
+    minHeight: "calc(100vh - 64px)",
   },
   hero: {
     padding: `${tokens.spacingVerticalXXL} ${tokens.spacingHorizontalXXL}`,
     backgroundColor: tokens.colorNeutralBackground2,
     borderBottom: `1px solid ${tokens.colorNeutralStroke2}`,
-    textAlign: 'center'
+    textAlign: "center",
   },
   heroTitle: {
-    fontSize: '40px',
+    fontSize: "40px",
     fontWeight: tokens.fontWeightSemibold,
     marginBottom: tokens.spacingVerticalL,
     color: tokens.colorNeutralForeground1,
-    letterSpacing: '-0.01em'
+    letterSpacing: "-0.01em",
   },
   heroSubtitle: {
     fontSize: tokens.fontSizeBase300,
     color: tokens.colorNeutralForeground2,
-    maxWidth: '600px',
-    margin: '0 auto',
-    lineHeight: '1.5'
+    maxWidth: "600px",
+    margin: "0 auto",
+    lineHeight: "1.5",
   },
   mainContent: {
     padding: `${tokens.spacingVerticalXXXL} ${tokens.spacingHorizontalXXL}`,
-    maxWidth: '1000px',
-    margin: '0 auto'
+    maxWidth: "1000px",
+    margin: "0 auto",
   },
   section: {
-    marginBottom: tokens.spacingVerticalXXXL
+    marginBottom: tokens.spacingVerticalXXXL,
   },
   sectionTitle: {
     marginBottom: tokens.spacingVerticalXL,
     color: tokens.colorNeutralForeground1,
     fontWeight: tokens.fontWeightSemibold,
-    fontSize: '28px',
-    letterSpacing: '-0.01em',
-    display: 'flex',
-    alignItems: 'center',
-    gap: tokens.spacingHorizontalM
+    fontSize: "28px",
+    letterSpacing: "-0.01em",
+    display: "flex",
+    alignItems: "center",
+    gap: tokens.spacingHorizontalM,
   },
   sectionIcon: {
-    fontSize: '24px',
-    color: tokens.colorBrandForeground1
+    fontSize: "24px",
+    color: tokens.colorBrandForeground1,
   },
   settingCard: {
     marginBottom: tokens.spacingVerticalL,
     border: `1px solid ${tokens.colorNeutralStroke2}`,
     borderRadius: tokens.borderRadiusLarge,
     backgroundColor: tokens.colorNeutralBackground1,
-    transition: 'all 0.2s ease-in-out',
-    '&:hover': {
-      borderColor: tokens.colorBrandStroke2,
-      boxShadow: tokens.shadow4
-    }
+    transition: "all 0.2s ease-in-out",
+    "&:hover": {
+      borderTopColor: tokens.colorBrandStroke2,
+      borderRightColor: tokens.colorBrandStroke2,
+      borderBottomColor: tokens.colorBrandStroke2,
+      borderLeftColor: tokens.colorBrandStroke2,
+      boxShadow: tokens.shadow4,
+    },
   },
   settingRow: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
     padding: tokens.spacingHorizontalXL,
     gap: tokens.spacingHorizontalL,
-    minHeight: '80px'
+    minHeight: "80px",
   },
   settingContent: {
-    flex: 1
+    flex: 1,
   },
   settingTitle: {
     marginBottom: tokens.spacingVerticalXS,
     fontWeight: tokens.fontWeightSemibold,
     color: tokens.colorNeutralForeground1,
-    fontSize: tokens.fontSizeBase300
+    fontSize: tokens.fontSizeBase300,
   },
   settingDescription: {
     color: tokens.colorNeutralForeground2,
     fontSize: tokens.fontSizeBase200,
-    lineHeight: '1.4'
+    lineHeight: "1.4",
   },
   settingControl: {
-    minWidth: '200px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-end'
+    minWidth: "200px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-end",
   },
   colorPreview: {
-    width: '20px',
-    height: '20px',
+    width: "20px",
+    height: "20px",
     borderRadius: tokens.borderRadiusCircular,
     border: `1px solid ${tokens.colorNeutralStroke1}`,
-    marginRight: tokens.spacingHorizontalS
+    marginRight: tokens.spacingHorizontalS,
   },
   radioGroupContainer: {
-    display: 'flex',
-    gap: tokens.spacingHorizontalL
+    display: "flex",
+    gap: tokens.spacingHorizontalL,
   },
   sliderContainer: {
-    minWidth: '150px',
-    textAlign: 'center'
+    minWidth: "150px",
+    textAlign: "center",
   },
   sliderLabel: {
     fontSize: tokens.fontSizeBase200,
     color: tokens.colorNeutralForeground2,
-    marginTop: tokens.spacingVerticalXS
+    marginTop: tokens.spacingVerticalXS,
   },
   actionButtons: {
-    display: 'flex',
+    display: "flex",
     gap: tokens.spacingHorizontalL,
-    justifyContent: 'center',
+    justifyContent: "center",
     marginTop: tokens.spacingVerticalXXL,
     padding: tokens.spacingVerticalXL,
     backgroundColor: tokens.colorNeutralBackground2,
     borderRadius: tokens.borderRadiusLarge,
-    border: `1px solid ${tokens.colorNeutralStroke2}`
+    border: `1px solid ${tokens.colorNeutralStroke2}`,
   },
   actionButton: {
     fontWeight: tokens.fontWeightSemibold,
-    minWidth: '140px',
-    transition: 'all 0.2s ease-in-out',
-    '&:hover': {
-      transform: 'translateY(-1px)'
-    }
+    minWidth: "140px",
+    transition: "all 0.2s ease-in-out",
+    "&:hover": {
+      transform: "translateY(-1px)",
+    },
   },
   preferenceGrid: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
     gap: tokens.spacingHorizontalL,
-    '@media (max-width: 768px)': {
-      gridTemplateColumns: '1fr'
-    }
+    "@media (max-width: 768px)": {
+      gridTemplateColumns: "1fr",
+    },
   },
   statsGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: tokens.spacingHorizontalL
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+    gap: tokens.spacingHorizontalL,
   },
   statsCard: {
-    textAlign: 'center',
+    textAlign: "center",
     padding: tokens.spacingHorizontalXL,
     border: `1px solid ${tokens.colorNeutralStroke2}`,
     borderRadius: tokens.borderRadiusLarge,
     backgroundColor: tokens.colorNeutralBackground1,
-    transition: 'all 0.2s ease-in-out',
-    '&:hover': {
-      transform: 'translateY(-2px)',
+    transition: "all 0.2s ease-in-out",
+    "&:hover": {
+      transform: "translateY(-2px)",
       boxShadow: tokens.shadow8,
-      borderColor: tokens.colorBrandStroke2
-    }
+      borderTopColor: tokens.colorBrandStroke2,
+      borderRightColor: tokens.colorBrandStroke2,
+      borderBottomColor: tokens.colorBrandStroke2,
+      borderLeftColor: tokens.colorBrandStroke2,
+    },
   },
   statValue: {
-    fontSize: '32px',
+    fontSize: "32px",
     fontWeight: tokens.fontWeightBold,
     color: tokens.colorBrandForeground1,
     marginBottom: tokens.spacingVerticalS,
-    lineHeight: '1.2'
+    lineHeight: "1.2",
   },
   statLabel: {
     color: tokens.colorNeutralForeground2,
     fontSize: tokens.fontSizeBase200,
-    fontWeight: tokens.fontWeightMedium
+    fontWeight: tokens.fontWeightMedium,
   },
   dividerSection: {
-    margin: `${tokens.spacingVerticalXXL} 0`
-  }
+    margin: `${tokens.spacingVerticalXXL} 0`,
+  },
 });
 
 export default function Settings() {
   const styles = useStyles();
   const { themeMode, setThemeMode } = useTheme();
-  
+
   // Other settings (not theme related)
-  const [colorScheme, setColorScheme] = useState('blue');
-  const [density, setDensity] = useState('normal');
-  
+  const [colorScheme, setColorScheme] = useState("blue");
+  const [density, setDensity] = useState("normal");
+
   // UI preferences
   const [animations, setAnimations] = useState(true);
   const [soundEffects, setSoundEffects] = useState(false);
   const [notifications, setNotifications] = useState(true);
   const [autoSave, setAutoSave] = useState(true);
-  
+
   // Accessibility settings
   const [highContrast, setHighContrast] = useState(false);
   const [fontSize, setFontSize] = useState(14);
   const [motionReduced, setMotionReduced] = useState(false);
-  
+
   // Performance settings
   const [prefetchData, setPrefetchData] = useState(true);
   const [cacheTimeout, setCacheTimeout] = useState(30);
 
   const handleSaveSettings = () => {
     // Simulate saving settings
-    console.log('Settings saved!');
+    console.log("Settings saved!");
   };
 
   const handleResetSettings = () => {
     // Reset to defaults
-    setThemeMode('light');
-    setColorScheme('blue');
-    setDensity('normal');
+    setThemeMode("light");
+    setColorScheme("blue");
+    setDensity("normal");
     setAnimations(true);
     setSoundEffects(false);
     setNotifications(true);
@@ -242,10 +248,10 @@ export default function Settings() {
   };
 
   const colorSchemes = [
-    { value: 'blue', label: 'Blue', color: tokens.colorBrandBackground },
-    { value: 'green', label: 'Green', color: '#107c10' },
-    { value: 'purple', label: 'Purple', color: '#5c2d91' },
-    { value: 'red', label: 'Red', color: '#d13438' }
+    { value: "blue", label: "Blue", color: tokens.colorBrandBackground },
+    { value: "green", label: "Green", color: "#107c10" },
+    { value: "purple", label: "Purple", color: "#5c2d91" },
+    { value: "red", label: "Red", color: "#d13438" },
   ];
 
   return (
@@ -253,7 +259,8 @@ export default function Settings() {
       <div className={styles.hero}>
         <div className={styles.heroTitle}>Application Settings</div>
         <div className={styles.heroSubtitle}>
-          Customize your Fluent UI experience with personalized preferences and accessibility options
+          Customize your Fluent UI experience with personalized preferences and
+          accessibility options
         </div>
       </div>
 
@@ -263,7 +270,7 @@ export default function Settings() {
             <DarkThemeRegular className={styles.sectionIcon} />
             Appearance & Theme
           </Title2>
-          
+
           <Card className={styles.settingCard}>
             <div className={styles.settingRow}>
               <div className={styles.settingContent}>
@@ -274,8 +281,8 @@ export default function Settings() {
               </div>
               <div className={styles.settingControl}>
                 <div className={styles.radioGroupContainer}>
-                  <RadioGroup 
-                    value={themeMode} 
+                  <RadioGroup
+                    value={themeMode}
                     onChange={(e, data) => setThemeMode(data.value)}
                     layout="horizontal"
                   >
@@ -296,15 +303,15 @@ export default function Settings() {
                 </div>
               </div>
               <div className={styles.settingControl}>
-                <Dropdown 
+                <Dropdown
                   value={colorScheme}
                   onOptionSelect={(e, data) => setColorScheme(data.optionValue)}
-                  style={{ minWidth: '150px' }}
+                  style={{ minWidth: "150px" }}
                 >
                   {colorSchemes.map((scheme) => (
                     <Option key={scheme.value} value={scheme.value}>
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <div 
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <div
                           className={styles.colorPreview}
                           style={{ backgroundColor: scheme.color }}
                         />
@@ -326,10 +333,10 @@ export default function Settings() {
                 </div>
               </div>
               <div className={styles.settingControl}>
-                <Dropdown 
+                <Dropdown
                   value={density}
                   onOptionSelect={(e, data) => setDensity(data.optionValue)}
-                  style={{ minWidth: '150px' }}
+                  style={{ minWidth: "150px" }}
                 >
                   <Option value="compact">Compact</Option>
                   <Option value="normal">Normal</Option>
@@ -347,7 +354,7 @@ export default function Settings() {
             <SettingsRegular className={styles.sectionIcon} />
             User Experience
           </Title2>
-          
+
           <div className={styles.preferenceGrid}>
             <Card className={styles.settingCard}>
               <div className={styles.settingRow}>
@@ -357,7 +364,7 @@ export default function Settings() {
                     Enable transitions and motion effects
                   </div>
                 </div>
-                <Switch 
+                <Switch
                   checked={animations}
                   onChange={(e) => setAnimations(e.currentTarget.checked)}
                 />
@@ -372,7 +379,7 @@ export default function Settings() {
                     Play audio feedback for interactions
                   </div>
                 </div>
-                <Switch 
+                <Switch
                   checked={soundEffects}
                   onChange={(e) => setSoundEffects(e.currentTarget.checked)}
                 />
@@ -387,7 +394,7 @@ export default function Settings() {
                     Receive real-time notifications and updates
                   </div>
                 </div>
-                <Switch 
+                <Switch
                   checked={notifications}
                   onChange={(e) => setNotifications(e.currentTarget.checked)}
                 />
@@ -402,7 +409,7 @@ export default function Settings() {
                     Automatically save changes and preferences
                   </div>
                 </div>
-                <Switch 
+                <Switch
                   checked={autoSave}
                   onChange={(e) => setAutoSave(e.currentTarget.checked)}
                 />
@@ -418,7 +425,7 @@ export default function Settings() {
             <BrightnessHighRegular className={styles.sectionIcon} />
             Accessibility
           </Title2>
-          
+
           <Card className={styles.settingCard}>
             <div className={styles.settingRow}>
               <div className={styles.settingContent}>
@@ -427,7 +434,7 @@ export default function Settings() {
                   Increase contrast for improved visibility and readability
                 </div>
               </div>
-              <Switch 
+              <Switch
                 checked={highContrast}
                 onChange={(e) => setHighContrast(e.currentTarget.checked)}
               />
@@ -464,7 +471,7 @@ export default function Settings() {
                   Minimize animations and transitions for better accessibility
                 </div>
               </div>
-              <Switch 
+              <Switch
                 checked={motionReduced}
                 onChange={(e) => setMotionReduced(e.currentTarget.checked)}
               />
@@ -476,16 +483,17 @@ export default function Settings() {
 
         <div className={styles.section}>
           <Title2 className={styles.sectionTitle}>Performance & Data</Title2>
-          
+
           <Card className={styles.settingCard}>
             <div className={styles.settingRow}>
               <div className={styles.settingContent}>
                 <div className={styles.settingTitle}>Prefetch Data</div>
                 <div className={styles.settingDescription}>
-                  Load content in advance for faster navigation and improved performance
+                  Load content in advance for faster navigation and improved
+                  performance
                 </div>
               </div>
-              <Switch 
+              <Switch
                 checked={prefetchData}
                 onChange={(e) => setPrefetchData(e.currentTarget.checked)}
               />
@@ -507,7 +515,7 @@ export default function Settings() {
                   min={5}
                   max={120}
                   step={5}
-                  style={{ width: '100px' }}
+                  style={{ width: "100px" }}
                 />
               </div>
             </div>
@@ -535,16 +543,16 @@ export default function Settings() {
         </div>
 
         <div className={styles.actionButtons}>
-          <Button 
-            appearance="primary" 
+          <Button
+            appearance="primary"
             icon={<SaveRegular />}
             onClick={handleSaveSettings}
             className={styles.actionButton}
           >
             Save Settings
           </Button>
-          <Button 
-            appearance="secondary" 
+          <Button
+            appearance="secondary"
             icon={<ArrowCounterclockwiseRegular />}
             onClick={handleResetSettings}
             className={styles.actionButton}
@@ -555,4 +563,4 @@ export default function Settings() {
       </div>
     </div>
   );
-} 
+}

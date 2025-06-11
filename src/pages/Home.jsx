@@ -117,7 +117,10 @@ const useStyles = makeStyles({
     "&:hover": {
       transform: "translateY(-4px)",
       boxShadow: tokens.shadow16,
-      borderColor: tokens.colorBrandStroke2,
+      borderTopColor: tokens.colorBrandStroke2,
+      borderRightColor: tokens.colorBrandStroke2,
+      borderBottomColor: tokens.colorBrandStroke2,
+      borderLeftColor: tokens.colorBrandStroke2,
     },
     "&::before": {
       content: '""',
